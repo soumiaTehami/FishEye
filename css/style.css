@@ -47,4 +47,29 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0.8rem rgba(134, 134, 134, 0.432);
+    height: 12.5rem;
+    margin: 0 auto;
+    object-fit: cover;
+    overflow: hidden;
+    
 }
+.photographer {
+    border: 1px solid #ddd;
+    padding: 20px;
+
+}
+.photographer-photos img {
+    width: 100%;
+    height: auto;
+}
+.photographer_card img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+
