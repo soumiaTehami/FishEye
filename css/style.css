@@ -72,4 +72,45 @@ h1 {
 }
 
 
+/* Ajoutez ces règles CSS à la fin de votre fichier CSS existant */
+
+/* Media queries pour les appareils de petite taille */
+@media screen and (max-width: 768px) {
+    header {
+        align-items: center;
+        height: auto;
+    }
+    
+    .logo {
+        margin: 20px 0;
+    }
+
+    h1 {
+        margin: 20px 0;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .photographer_section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .photographer_section article {
+        justify-self: auto;
+    }
+
+    .photographer_section article img {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+/* Media queries pour les appareils de taille moyenne */
+@media screen and (max-width: 1024px) {
+    .photographer_section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
