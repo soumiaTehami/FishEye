@@ -1,10 +1,14 @@
 function photographerTemplate(data) {
-    const { name, portrait, tagline, price, country } = data;
+    const { id,name, portrait, tagline, price, country } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
         const article = document.createElement('article');
+        const a=document.createElement('a');
+        a.href=`photographer.html?id=${id}`;
+        a.ariaLabel=`voir le profil de ${name}`;
+        a.tabIndex=0;
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         img.setAttribute("alt", `${name} - ${tagline}`);
@@ -28,9 +32,10 @@ function photographerTemplate(data) {
 
         // Ajouter une classe à l'élément article
         article.classList.add("photographer-card");
-
-        article.appendChild(img);
-        article.appendChild(h2);
+        
+        a.appendChild(img);
+        a.appendChild(h2);
+        article.appendChild(a);
         article.appendChild(pCountry);
         article.appendChild(h3);
         article.appendChild(pPrice);
@@ -40,15 +45,15 @@ function photographerTemplate(data) {
 
     return { name, picture, tagline, price, country, getUserCardDOM };
 }
+
 const searchParams = new URLSearchParams(window.location.search);
 
 // Accéder à un paramètre spécifique
 const id = searchParams.get("id");
-const category = searchParams.get("category");
+
 
 // Utiliser les valeurs des paramètres
 console.log("ID:", id);
-console.log("Category:", category);
 // Récupérer tous les éléments avec la classe "photographer"
 const photographers = document.querySelectorAll(".photographer-card");
 
