@@ -89,7 +89,7 @@ h1 {
 /* Ajoutez ces règles CSS à la fin de votre fichier CSS existant */
 
 /* Media queries pour les appareils de petite taille */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1065px) {
     header {
         
     
