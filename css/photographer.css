@@ -38,6 +38,7 @@
     width: 100%;
 }
 
+
 .modal header img {
     cursor: pointer;
 }
@@ -74,3 +75,35 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+
+
+.photograph-header img {
+    max-width: 50%;
+    float: right; /* La propriété float permet de faire flotter l'élément à droite */
+    margin-left: 20px; /* Pour créer un espace entre l'image et le texte */
+    border-radius: 50%;
+    height: 100px;
+    object-fit: cover;
+    width: 100px;
+  }
+  .photograph-details {
+    max-width: 50%;
+    margin-right: auto;
+  }
+  
+  /* Pour le reste du contenu de photograph-details */
+  .photograph-header h1 {
+    color: #D3573C;
+    font-size: 2.4em;
+    font-weight: 400;
+    margin: auto;
+  }
+  
+  .photograph-details p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  .photographer-details{
+   
+  }
