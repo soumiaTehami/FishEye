@@ -86,6 +86,7 @@ form input {
     height: 100px;
     object-fit: cover;
     width: 100px;
+    
   }
   .photograph-details {
     max-width: 50%;
@@ -97,13 +98,68 @@ form input {
     color: #D3573C;
     font-size: 2.4em;
     font-weight: 400;
-    margin: auto;
+    margin:0;
+
+
   }
   
   .photograph-details p {
     font-size: 16px;
     margin: 5px 0;
-  }
-  .photographer-details{
+    margin-bottom: 20px;
    
   }
+ 
+  
+  
+  .photograph-header {
+    display: flex;
+    padding: 50px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+ 
+  
+  .contact_button {
+    
+    
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:1;
+  }
+  .details-paragraph{
+    color: #901c1c;
+    font-size: 25px;
+    margin: 0;
+}
+#sort-by-dropdown {
+  background-color: #901C1C;
+  color: white;;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 30px;
+  overflow: hidden;
+  padding: 17px 45px 17px 30px;
+  width: 160px;
+
+}
+.tri{
+align-items: center;
+display: flex;
+padding: 30px;
+
+}
+  
+  
