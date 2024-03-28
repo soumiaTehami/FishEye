@@ -161,5 +161,40 @@ display: flex;
 padding: 30px;
 
 }
+/* Style général pour la galerie */
+#photographer_gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Pour répartir les éléments sur toute la largeur */
+  padding: 20px; /* Ajoute du padding à la galerie */
+}
+
+/* Style pour chaque média dans la galerie */
+#photographer_gallery img,
+#photographer_gallery video {
+  width: calc(33.33% - 20px); /* Pour que trois images s'affichent sur une ligne */
+  margin-bottom: 20px; /* Ajoute un espace entre les médias */
+  border-radius: .3125rem;
+  height: 11.875rem;
+  object-fit: cover;
+    
+}
+
+
+/* Style pour les vidéos spécifiquement */
+#photographer_gallery video {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style pour les légendes sous les médias */
+.media-caption {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
   
   
