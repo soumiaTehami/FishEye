@@ -2,7 +2,6 @@
 const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
 
-
 // Fonction pour récupérer les données du photographe depuis le fichier JSON
 async function getPhotographerData(id) {
   try {
@@ -10,12 +9,14 @@ async function getPhotographerData(id) {
     const data = await response.json();
     const photographer = data.photographers.find(
       (photographer) => photographer.id == id
-
     );
-    const media=data.media.filter((media) =>media.photographerId == id)
+
+    const media = data.media.filter((media) => media.photographerId == id);
+
     if (photographer && media) {
-      return {photographer,media}
-      
+      // Ajout de la récupération du tarif
+      const tarif = photographer.price;
+      return { photographer, media, tarif };
     } else {
       throw new Error("Photographe non trouvé");
     }
@@ -29,16 +30,19 @@ async function getPhotographerData(id) {
 
 // Appel de la fonction pour récupérer les données du photographe
 getPhotographerData(id)
-  .then((photographer) => {
-    if (photographer) {
-      displayPhotos(photographer.photographer);
+  .then((photographerData) => {
+    if (photographerData) {
+      displayPhotos(photographerData.photographer);
       
       // Afficher les médias du photographe s'ils existent
-      if (photographer.media) {
+      if (photographerData.media) {
         const mediaContainer = document.getElementById("photographer_gallery");
+        displayMedia(mediaContainer, photographerData);
+      }
 
-        console.log(mediaContainer);
-        displayMedia(mediaContainer, photographer);
+      // Afficher le tarif du photographe
+      if (photographerData.tarif) {
+        displayTarif(photographerData.tarif);
       }
     }
   })
@@ -82,12 +86,11 @@ function displayPhotos(photographer) {
   photographerDetailsContainer.appendChild(taglineParagraph);
 }
 
-function displayMedia(mediaContainer, media) {
+function displayMedia(mediaContainer, photographerData) {
   // Parcourir tous les médias du photographe
-  console.log(media);
-  media.media.forEach((mediaItem) => {
+  photographerData.media.forEach((mediaItem) => {
     // Créer un élément de média approprié en fonction du type (image ou vidéo)
-    const mediaElement = createMediaElement(mediaItem, media.photographer.name);
+    const mediaElement = createMediaElement(mediaItem, photographerData.photographer.name);
     // Ajouter l'élément de média au conteneur
     mediaContainer.appendChild(mediaElement);
   });
@@ -95,14 +98,12 @@ function displayMedia(mediaContainer, media) {
 
 // Fonction pour créer un élément de média (image ou vidéo)
 function createMediaElement(media, namePhotographe) {
-console.log(media);
-console.log(namePhotographe);
   if (media.image) {
     const img = document.createElement("img");
     img.src = `assets/images/${namePhotographe}/${media.image}`;
     img.alt = media.title;
     return img;
-  } else if (media.video ) {
+  } else if (media.video) {
     const video = document.createElement("video");
     video.src = `assets/images/${namePhotographe}/${media.video}`;
     video.alt = media.title;
@@ -116,4 +117,12 @@ console.log(namePhotographe);
     unsupportedMedia.textContent = "Type de média non pris en charge";
     return unsupportedMedia;
   }
+}
+
+// Fonction pour afficher le tarif journalier du photographe sur la page HTML
+function displayTarif(tarif) {
+  const tarifContainer = document.querySelector(".tarif-container");
+  const tarifValue = document.createElement("p");
+  tarifValue.textContent = tarif + " €/jour";
+  tarifContainer.appendChild(tarifValue);
 }

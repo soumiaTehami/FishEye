@@ -177,6 +177,7 @@ padding: 30px;
   border-radius: .3125rem;
   height: 11.875rem;
   object-fit: cover;
+  object-position: top;
     
 }
 
@@ -192,6 +193,32 @@ padding: 30px;
   text-align: center;
   font-size: 14px;
   margin-top: 5px;
+}
+.tarif-container {
+  margin-top: 20px;
+  background: #db8876;
+  border-radius: .3125rem;
+    bottom: 0;
+    display: flex;
+    font-size: 1.2em;
+    font-weight: 500;
+    height: 4.375rem;
+    justify-content: space-between;
+    padding: 0 2.1875rem;
+    position: fixed;
+    right: 2.5rem;
+    width: 18rem;
+}
+
+.tarif-value {
+  font-size: 18px;
+  color: #333; /* Couleur du texte */
+  font-weight: bold; /* Texte en gras */
+}
+
+.tarif-label {
+  font-size: 16px;
+  color: #666; /* Couleur du texte */
 }
 
 
