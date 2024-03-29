@@ -113,13 +113,18 @@ if (media.title) {
   titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
   titleDiv.appendChild(titleParagraph);
 }
-// Ajouter le prix s'il existe
-if (media.price) {
-  const priceParagraph = document.createElement("p");
-  priceParagraph.textContent = `${media.price} €`; // Supposant que le prix est en euros
-  titleDiv.appendChild(priceParagraph);
-}
+const likeCountSpan = document.createElement("span");
+  likeCountSpan.textContent = `${media.likes || 0} `;
+  titleDiv.appendChild(likeCountSpan);
 
+  const likeButton = document.createElement("button");
+  likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
+  likeButton.classList.add("like-button");
+  likeButton.addEventListener("click", () => {
+    media.likes = (media.likes || 0) + 1;
+    likeCountSpan.textContent = `${media.likes}`;
+  });
+  titleDiv.appendChild(likeButton);
   return mediaContainer;
 }
 

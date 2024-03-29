@@ -232,9 +232,22 @@ padding: 30px;
   color: #333; /* Couleur du texte */
 }
 
-.media-title{
-  align-items: center;
+
+/* Style pour le titre et le bouton like */
+.media-title {
   display: flex;
   justify-content: space-between;
-  margin-top: 0;
-}  
+  align-items: center;
+}
+
+.like-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ff0000; /* Couleur rouge pour le cœur */
+}
+
+.like-button:hover {
+  transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
