@@ -28,31 +28,6 @@ async function getPhotographerData(id) {
   }
 }
 
-// Appel de la fonction pour récupérer les données du photographe
-getPhotographerData(id)
-  .then((photographerData) => {
-    if (photographerData) {
-      displayPhotos(photographerData.photographer);
-      
-      // Afficher les médias du photographe s'ils existent
-      if (photographerData.media) {
-        const mediaContainer = document.getElementById("photographer_gallery");
-        displayMedia(mediaContainer, photographerData);
-      }
-
-      // Afficher le tarif du photographe
-      if (photographerData.tarif) {
-        displayTarif(photographerData.tarif);
-      }
-    }
-  })
-  .catch((error) => {
-    console.error(
-      "Erreur lors de la récupération des données du photographe :",
-      error
-    );
-  });
-
 // Fonction pour afficher les informations du photographe sur la page HTML
 function displayPhotos(photographer) {
   const infoPhotographe = document.querySelector(".photograph-header");
@@ -86,11 +61,15 @@ function displayPhotos(photographer) {
   photographerDetailsContainer.appendChild(taglineParagraph);
 }
 
+// Fonction pour afficher les médias du photographe
 function displayMedia(mediaContainer, photographerData) {
   // Parcourir tous les médias du photographe
   photographerData.media.forEach((mediaItem) => {
     // Créer un élément de média approprié en fonction du type (image ou vidéo)
-    const mediaElement = createMediaElement(mediaItem, photographerData.photographer.name);
+    const mediaElement = createMediaElement(
+      mediaItem,
+      photographerData.photographer.name
+    );
     // Ajouter l'élément de média au conteneur
     mediaContainer.appendChild(mediaElement);
   });
@@ -98,26 +77,52 @@ function displayMedia(mediaContainer, photographerData) {
 
 // Fonction pour créer un élément de média (image ou vidéo)
 function createMediaElement(media, namePhotographe) {
+  console.log(media);
+  console.log(namePhotographe);
+  // Créer le conteneur pour le média
+  const mediaContainer = document.createElement("div");
+
   if (media.image) {
     const img = document.createElement("img");
     img.src = `assets/images/${namePhotographe}/${media.image}`;
     img.alt = media.title;
-    return img;
+    mediaContainer.appendChild(img);
   } else if (media.video) {
     const video = document.createElement("video");
     video.src = `assets/images/${namePhotographe}/${media.video}`;
     video.alt = media.title;
     video.controls = true;
-    return video;
+    mediaContainer.appendChild(video);
   } else {
     // Gestion pour les autres types de médias
     console.error("Type de média non pris en charge:", media.type);
     // Vous pouvez afficher un message d'erreur ou créer un élément générique pour ce type de média
     const unsupportedMedia = document.createElement("p");
     unsupportedMedia.textContent = "Type de média non pris en charge";
-    return unsupportedMedia;
+    mediaContainer.appendChild(unsupportedMedia);
   }
+
+ // Créer une div pour le titre
+const titleDiv = document.createElement("div");
+titleDiv.classList.add("media-title");
+mediaContainer.appendChild(titleDiv);
+
+
+if (media.title) {
+  const titleParagraph = document.createElement("p");
+  titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
+  titleDiv.appendChild(titleParagraph);
 }
+// Ajouter le prix s'il existe
+if (media.price) {
+  const priceParagraph = document.createElement("p");
+  priceParagraph.textContent = `${media.price} €`; // Supposant que le prix est en euros
+  titleDiv.appendChild(priceParagraph);
+}
+
+  return mediaContainer;
+}
+
 
 // Fonction pour afficher le tarif journalier du photographe sur la page HTML
 function displayTarif(tarif) {
@@ -126,3 +131,28 @@ function displayTarif(tarif) {
   tarifValue.textContent = tarif + " €/jour";
   tarifContainer.appendChild(tarifValue);
 }
+
+// Appel de la fonction pour récupérer les données du photographe
+getPhotographerData(id)
+  .then((photographerData) => {
+    if (photographerData) {
+      displayPhotos(photographerData.photographer);
+
+      // Afficher les médias du photographe s'ils existent
+      if (photographerData.media) {
+        const mediaContainer = document.getElementById("photographer_gallery");
+        displayMedia(mediaContainer, photographerData);
+      }
+
+      // Afficher le tarif du photographe
+      if (photographerData.tarif) {
+        displayTarif(photographerData.tarif);
+      }
+    }
+  })
+  .catch((error) => {
+    console.error(
+      "Erreur lors de la récupération des données du photographe :",
+      error
+    );
+  });

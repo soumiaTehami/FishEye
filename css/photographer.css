@@ -172,14 +172,16 @@ padding: 30px;
 /* Style pour chaque média dans la galerie */
 #photographer_gallery img,
 #photographer_gallery video {
-  width: calc(33.33% - 20px); /* Pour que trois images s'affichent sur une ligne */
+  /*width: calc(33.33% - 20px); /* Pour que trois images s'affichent sur une ligne */
   margin-bottom: 20px; /* Ajoute un espace entre les médias */
+  margin-right: 20px; /* Ajoute un espace entre les médias */
   border-radius: .3125rem;
-  height: 11.875rem;
+  height: auto; /* Réglez la hauteur sur "auto" pour maintenir les proportions */
   object-fit: cover;
   object-position: top;
-    
+  max-height: 300px; /* Pour limiter la hauteur des médias */
 }
+
 
 
 /* Style pour les vidéos spécifiquement */
@@ -223,5 +225,16 @@ padding: 30px;
 
 
 
-  
-  
+
+.media-container p {
+  margin-top: 5px; /* Espacement entre l'image/vidéo et son titre */
+  font-size: 14px; /* Taille de la police du titre */
+  color: #333; /* Couleur du texte */
+}
+
+.media-title{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}  
