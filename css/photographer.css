@@ -205,7 +205,6 @@ padding: 30px;
     font-size: 1.2em;
     font-weight: 500;
     height: 4.375rem;
-    justify-content: space-between; /* Ajuste l'espace entre les éléments */
     margin: 0; /* Supprime les marges par défaut */
     padding: 0 2.1875rem;
     position: fixed;
@@ -262,4 +261,12 @@ padding: 30px;
 
 .like-button:hover {
   transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
+.tarif-likes-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.heart-symbol span{
+  color: black; /* Couleur du cœur */
 }
