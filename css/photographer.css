@@ -163,24 +163,24 @@ padding: 30px;
 }
 /* Style général pour la galerie */
 #photographer_gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Pour répartir les éléments sur toute la largeur */
-  padding: 20px; /* Ajoute du padding à la galerie */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(33.33% - 20px), 1fr));
+  grid-gap: 20px;
+  padding: 20px;
 }
 
-/* Style pour chaque média dans la galerie */
+
+
+/* Style pour les images et vidéos */
 #photographer_gallery img,
 #photographer_gallery video {
-  /*width: calc(33.33% - 20px); /* Pour que trois images s'affichent sur une ligne */
-  margin-bottom: 20px; /* Ajoute un espace entre les médias */
-  margin-right: 20px; /* Ajoute un espace entre les médias */
+  width: 100%;
+  height: auto;
   border-radius: .3125rem;
-  height: auto; /* Réglez la hauteur sur "auto" pour maintenir les proportions */
   object-fit: cover;
-  object-position: top;
-  max-height: 300px; /* Pour limiter la hauteur des médias */
+  max-height: 200px; /* Limiter la hauteur des médias */
 }
+
 
 
 
@@ -205,11 +205,19 @@ padding: 30px;
     font-size: 1.2em;
     font-weight: 500;
     height: 4.375rem;
-    justify-content: space-between;
+    justify-content: space-between; /* Ajuste l'espace entre les éléments */
+    margin: 0; /* Supprime les marges par défaut */
     padding: 0 2.1875rem;
     position: fixed;
     right: 2.5rem;
     width: 18rem;
+}
+
+.tarif-text {
+  /* Styles CSS pour le paragraphe */
+  font-size: 16px;
+  color: #333;
+  /* Autres styles selon vos besoins */
 }
 
 .tarif-value {
@@ -234,11 +242,15 @@ padding: 30px;
 
 
 /* Style pour le titre et le bouton like */
-.media-title {
+
+.media-title{
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
+  color: #901c1c;
 }
+
+
 
 .like-button {
   background-color: transparent;

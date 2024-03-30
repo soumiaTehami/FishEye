@@ -81,6 +81,7 @@ function createMediaElement(media, namePhotographe) {
   console.log(namePhotographe);
   // Créer le conteneur pour le média
   const mediaContainer = document.createElement("div");
+  mediaContainer.classList.add("media-element")
 
   if (media.image) {
     const img = document.createElement("img");
@@ -113,9 +114,15 @@ if (media.title) {
   titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
   titleDiv.appendChild(titleParagraph);
 }
+const titleAndLikeContainer = document.createElement("div");
+titleAndLikeContainer.classList.add("title-and-like-container");
+
+const likeDiv = document.createElement("div");
+const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
+  mediaContainer.dataset.likes = likeCount;
 const likeCountSpan = document.createElement("span");
   likeCountSpan.textContent = `${media.likes || 0} `;
-  titleDiv.appendChild(likeCountSpan);
+  likeDiv.appendChild(likeCountSpan);
 
   const likeButton = document.createElement("button");
   likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
@@ -124,18 +131,54 @@ const likeCountSpan = document.createElement("span");
     media.likes = (media.likes || 0) + 1;
     likeCountSpan.textContent = `${media.likes}`;
   });
-  titleDiv.appendChild(likeButton);
+  likeDiv.appendChild(likeButton);
+  titleAndLikeContainer.appendChild(likeDiv)
+  titleDiv.appendChild(titleAndLikeContainer);
   return mediaContainer;
 }
 
 
 // Fonction pour afficher le tarif journalier du photographe sur la page HTML
+
 function displayTarif(tarif) {
   const tarifContainer = document.querySelector(".tarif-container");
   const tarifValue = document.createElement("p");
-  tarifValue.textContent = tarif + " €/jour";
+
+  // Calculer le nombre total de likes
+  let totalLikes = 0;
+
+  // Sélectionner tous les médias
+  const mediaElements = document.querySelectorAll(".media-element");
+
+  // Parcourir chaque média
+  mediaElements.forEach(mediaElement => {
+    // Récupérer le nombre de likes de ce média
+    const likeCount = parseInt(mediaElement.dataset.likes);
+
+    // Vérifier si le nombre de likes est un nombre valide
+    if (!isNaN(likeCount)) {
+      // Ajouter le nombre de likes au total
+      totalLikes += likeCount;
+    }
+  });
+
+  const heartSymbol = document.createElement("span");
+  heartSymbol.textContent = " \u2665"; // Caractère Unicode pour un cœur noir
+  heartSymbol.style.color = "black"; // Style du cœur noir
+
+  // Afficher le tarif avec le nombre total de likes et le symbole de cœur noir
+  tarifValue.textContent = `${totalLikes}${heartSymbol.textContent}          ${tarif} €/jour`;
+
+  // Ajouter une classe au paragraphe
+  tarifValue.classList.add("tarif-text");
+
+  // Ajouter le tarif au conteneur
   tarifContainer.appendChild(tarifValue);
 }
+
+
+
+
 
 // Appel de la fonction pour récupérer les données du photographe
 getPhotographerData(id)
