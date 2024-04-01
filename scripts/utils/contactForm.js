@@ -1,12 +1,13 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
+
 // Fonction pour vérifier le formulaire avant la soumission
 function validateForm() {
     // Récupérer les champs du formulaire
@@ -38,6 +39,7 @@ function validateForm() {
     // Si toutes les validations sont passées, retourner vrai pour autoriser la soumission du formulaire
     return true;
 }
+
 function handleSubmit(event) {
     event.preventDefault(); // Empêcher le comportement par défaut du formulaire
     if (validateForm()) {
@@ -45,6 +47,9 @@ function handleSubmit(event) {
         const formDataObject = Object.fromEntries(formData.entries()); // Convertir les données en objet JavaScript
         console.log(formDataObject); // Afficher les données dans la console
         // Ajoutez ici le code pour envoyer les données du formulaire (par exemple, à un serveur)
+
+        // Réinitialiser le formulaire après la soumission réussie
+        event.target.reset();
     }
 }
 

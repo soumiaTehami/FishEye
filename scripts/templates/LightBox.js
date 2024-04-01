@@ -10,10 +10,22 @@ function createLightbox(mediaList, photographerName) {
 
         const media = mediaList[index];
 
-        const fullscreenImage = document.createElement("img");
-        fullscreenImage.src = `assets/images/${photographerName}/${media.image}`;
-        fullscreenImage.alt = media.title || '';
-        fullscreenImage.classList.add("fullscreen-media");
+        if (media.image) {
+            // Afficher l'image
+            const fullscreenImage = document.createElement("img");
+            fullscreenImage.src = `assets/images/${photographerName}/${media.image}`;
+            fullscreenImage.alt = media.title || '';
+            fullscreenImage.classList.add("fullscreen-media");
+            lightbox.appendChild(fullscreenImage);
+        } else if (media.video) {
+            // Afficher la vidéo
+            const fullscreenVideo = document.createElement("video");
+            fullscreenVideo.src = `assets/images/${photographerName}/${media.video}`;
+            fullscreenVideo.alt = media.title || '';
+            fullscreenVideo.controls = true;
+            fullscreenVideo.classList.add("fullscreen-media");
+            lightbox.appendChild(fullscreenVideo);
+        }
 
         const closeButton = document.createElement("button");
         closeButton.innerHTML = "&times;";
@@ -21,9 +33,6 @@ function createLightbox(mediaList, photographerName) {
         closeButton.addEventListener("click", () => {
             lightbox.remove();
         });
-
-        // Ajouter le média et le bouton de fermeture à la Lightbox
-        lightbox.appendChild(fullscreenImage);
         lightbox.appendChild(closeButton);
 
         // Mettre à jour l'index actuel
@@ -41,6 +50,7 @@ function createLightbox(mediaList, photographerName) {
         currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
         displayMedia(currentIndex);
     });
+    lightbox.appendChild(prevButton);
 
     const nextButton = document.createElement("button");
     nextButton.innerHTML = "&gt;"; // Flèche droite
@@ -49,22 +59,25 @@ function createLightbox(mediaList, photographerName) {
         currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
         displayMedia(currentIndex);
     });
-
-    lightbox.appendChild(prevButton);
     lightbox.appendChild(nextButton);
 
     // Ajouter la Lightbox à la page
     document.body.appendChild(lightbox);
 
     // Ajouter des événements de clic pour chaque élément de la galerie
-    mediaList.forEach((media, index) => {
-        const container = document.createElement("div");
-        container.classList.add("media-container");
-        container.addEventListener("click", () => {
+    // Ajouter des événements de clic pour chaque élément de la galerie
+mediaList.forEach((media, index) => {
+    const container = document.createElement("div");
+    container.classList.add("media-container");
+    container.addEventListener("click", (event) => {
+        // Vérifier si l'élément cliqué est le bouton de like
+        if (!event.target.classList.contains("like-button")) {
             displayMedia(index);
-        });
-        lightbox.appendChild(container);
+        }
     });
+    lightbox.appendChild(container);
+});
+
 
     return lightbox;
 }

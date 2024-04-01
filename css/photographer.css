@@ -1,5 +1,22 @@
 #contact_modal {
-    display: none;
+  display: none; /* Assurez-vous que la modal est cachée par défaut */
+  position: fixed; /* Position fixe pour qu'elle reste au-dessus de la page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour assombrir la page */
+  z-index: 1001; /* Niveau de z-index élevé pour être au-dessus de la page */
+  overflow: auto; /* Permettre le défilement si le contenu dépasse */
+  padding-top: 50px; /* Espacement en haut pour laisser de l'espace pour les éléments de la page sous la modal */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; /* Centrer la modal verticalement et horizontalement */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Largeur de la modal */
 }
 
 .photograph-header {
@@ -54,6 +71,7 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+
 }
 
 form label {
@@ -67,6 +85,7 @@ form div {
     width: 100%;
     align-items: self-start;
     margin-bottom: 26px;
+  
 }
 
 form input {
@@ -284,6 +303,7 @@ padding: 30px;
     align-items: center;
 }
 
+
 /* Style pour l'image en plein écran */
 .fullscreen-image {
   max-width: 90%;
@@ -334,21 +354,21 @@ padding: 30px;
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  color: #fff;
   border: none;
-  cursor: pointer;
+  color: #fff;
   font-size: 24px;
-  line-height: 1;
-
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .nav-button.left {
-  left: 10px;
+  left: 20px;
 }
 
 .nav-button.right {
-  right: 10px;
+  right: 20px;
 }
+
 
 /* Style pour le bouton de fermeture */
 .close-button {
@@ -363,4 +383,21 @@ padding: 30px;
   line-height: 1;
   z-index: 1001; /* Assure que le bouton de fermeture soit au-dessus de la Lightbox */
 }
+.media-container {
+  margin: 20px;
+  cursor: pointer;
+}
 
+.media-container img,
+.media-container video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.media-container:hover img,
+.media-container:hover video {
+  transform: scale(1.05);
+}
