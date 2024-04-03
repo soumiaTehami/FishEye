@@ -1,22 +1,27 @@
 // Fonction pour créer un élément de média (image ou vidéo)
 function createMediaElement(media, namePhotographe) {
-    console.log(media);
-    console.log(namePhotographe);
+   
     // Créer le conteneur pour le média
     const mediaContainer = document.createElement("div");
     mediaContainer.classList.add("media-element");
   
     if (media.image) {
+      const imageDiv = document.createElement("div");
+      imageDiv.classList.add("image-wrapper");
       const img = document.createElement("img");
       img.src = `assets/images/${namePhotographe}/${media.image}`;
       img.alt = media.title;
-      mediaContainer.appendChild(img);
+      imageDiv.appendChild(img);
+      mediaContainer.appendChild(imageDiv);
     } else if (media.video) {
+      const imageDiv = document.createElement("div");
+      imageDiv.classList.add("image-wrapper");
       const video = document.createElement("video");
       video.src = `assets/images/${namePhotographe}/${media.video}`;
       video.alt = media.title;
       video.controls = true;
-      mediaContainer.appendChild(video);
+      imageDiv.appendChild(video);
+      mediaContainer.appendChild(imageDiv);
     } else {
       // Gestion pour les autres types de médias
       console.error("Type de média non pris en charge:", media.type);
@@ -58,10 +63,10 @@ function createMediaElement(media, namePhotographe) {
   titleAndLikeContainer.appendChild(likeDiv);
   titleDiv.appendChild(titleAndLikeContainer);
   // Ajouter un événement de clic pour ouvrir la Lightbox
-  mediaContainer.addEventListener("click", () => {
-    const lightbox = createLightbox([media], namePhotographe);
-    document.body.appendChild(lightbox);
-  });
+  // mediaContainer.firstChild.addEventListener("click", () => {
+  //   const lightbox = createLightbox([media], namePhotographe);
+  //   document.body.appendChild(lightbox);
+  // });
   return mediaContainer;
 }
 

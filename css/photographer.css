@@ -11,6 +11,7 @@
   padding-top: 50px; /* Espacement en haut pour laisser de l'espace pour les éléments de la page sous la modal */
 }
 
+
 .modal-content {
   background-color: #fefefe;
   margin: 5% auto; /* Centrer la modal verticalement et horizontalement */
@@ -166,6 +167,7 @@ form input {
   color: white;;
   border: none;
   border-radius: 5px;
+  border: 1px solid #ccc;
   cursor: pointer;
   font-size: 18px;
   margin-left: 30px;
@@ -335,6 +337,7 @@ padding: 30px;
   max-width: 100%;
   height: auto;
 }
+
 .close-button {
   font-size: 40px; 
   line-height: 1; 
@@ -348,26 +351,6 @@ padding: 30px;
   margin: auto;
 }
 
-/* Style pour les boutons de navigation */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.nav-button.left {
-  left: 20px;
-}
-
-.nav-button.right {
-  right: 20px;
-}
 
 
 /* Style pour le bouton de fermeture */
@@ -401,3 +384,36 @@ padding: 30px;
 .media-container:hover video {
   transform: scale(1.05);
 }
+
+/* Styles des boutons de navigation */
+.nav-button-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000; /* Assure que les boutons sont au-dessus du contenu de la lightbox */
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5rem;
+  height: 5rem; /* Définissez la hauteur pour rendre le bouton carré */
+  background-color: transparent;
+  color: #901C1C;
+  font-size: 3rem;
+  cursor: pointer;
+  border: none; /* Supprimez le bord */
+  z-index: 1001;
+}
+
+.nav-button.left {
+  left: 0; /* Position du bouton gauche */
+}
+
+.nav-button.right {
+  right: 0; /* Position du bouton droit */
+}
+
+
+

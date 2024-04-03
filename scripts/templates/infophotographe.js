@@ -43,4 +43,14 @@ function displayPhotos(photographer) {
       // Ajouter l'élément de média au conteneur
       mediaContainer.appendChild(mediaElement);
     });
+    const allmedia=document.querySelectorAll(".image-wrapper");
+    allmedia.forEach((media,index)=>{
+      media.addEventListener('click',(e)=>{
+        e.preventDefault();
+          const lightbox = createLightbox(index, photographerData.media, photographerData.photographer.name);
+          document.body.appendChild(lightbox);
+          
+      })
+    })
+    
   }

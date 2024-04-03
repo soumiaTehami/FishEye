@@ -1,8 +1,8 @@
-function createLightbox(mediaList, photographerName) {
+function createLightbox(index,mediaList, photographerName) {
     const lightbox = document.createElement("div");
     lightbox.classList.add("lightbox");
-    let currentIndex = 0; // Index du média actuellement affiché
-
+    let currentIndex = index; // Index du média actuellement affiché
+ console.log(mediaList.length);
     // Fonction pour afficher le média à l'index spécifié
     function displayMedia(index) {
         // Supprimer le contenu précédent de la Lightbox
@@ -21,7 +21,7 @@ function createLightbox(mediaList, photographerName) {
             // Afficher la vidéo
             const fullscreenVideo = document.createElement("video");
             fullscreenVideo.src = `assets/images/${photographerName}/${media.video}`;
-            fullscreenVideo.alt = media.title || '';
+            fullscreenVideo.ariaLabel = media.title || '';
             fullscreenVideo.controls = true;
             fullscreenVideo.classList.add("fullscreen-media");
             lightbox.appendChild(fullscreenVideo);
@@ -44,17 +44,18 @@ function createLightbox(mediaList, photographerName) {
 
     // Ajouter des boutons pour la navigation entre les médias
     const prevButton = document.createElement("button");
-    prevButton.innerHTML = "&lt;"; // Flèche gauche
-    prevButton.classList.add("nav-button");
+    prevButton.innerHTML = "<";
+    prevButton.classList.add("nav-button", "left");
     prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
+         currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
+        console.log(currentIndex);
         displayMedia(currentIndex);
     });
     lightbox.appendChild(prevButton);
 
     const nextButton = document.createElement("button");
-    nextButton.innerHTML = "&gt;"; // Flèche droite
-    nextButton.classList.add("nav-button");
+    nextButton.innerHTML = ">";
+    nextButton.classList.add("nav-button", "right");
     nextButton.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
         displayMedia(currentIndex);
@@ -63,21 +64,6 @@ function createLightbox(mediaList, photographerName) {
 
     // Ajouter la Lightbox à la page
     document.body.appendChild(lightbox);
-
-    // Ajouter des événements de clic pour chaque élément de la galerie
-    // Ajouter des événements de clic pour chaque élément de la galerie
-mediaList.forEach((media, index) => {
-    const container = document.createElement("div");
-    container.classList.add("media-container");
-    container.addEventListener("click", (event) => {
-        // Vérifier si l'élément cliqué est le bouton de like
-        if (!event.target.classList.contains("like-button")) {
-            displayMedia(index);
-        }
-    });
-    lightbox.appendChild(container);
-});
-
 
     return lightbox;
 }
