@@ -1,8 +1,10 @@
-function createLightbox(index,mediaList, photographerName) {
+// Ajoutez l'écouteur d'événements à chaque élément multimédia
+
+function createLightbox(index, mediaList, photographerName) {
     const lightbox = document.createElement("div");
     lightbox.classList.add("lightbox");
     let currentIndex = index; // Index du média actuellement affiché
- console.log(mediaList.length);
+
     // Fonction pour afficher le média à l'index spécifié
     function displayMedia(index) {
         // Supprimer le contenu précédent de la Lightbox
@@ -37,30 +39,52 @@ function createLightbox(index,mediaList, photographerName) {
 
         // Mettre à jour l'index actuel
         currentIndex = index;
+
+        // Vérifier si les boutons de navigation existent déjà
+        // S'ils existent, les supprimer avant d'ajouter les nouveaux boutons
+        const existingPrevButton = lightbox.querySelector(".nav-button.left");
+        if (existingPrevButton) {
+            existingPrevButton.remove();
+        }
+        const existingNextButton = lightbox.querySelector(".nav-button.right");
+        if (existingNextButton) {
+            existingNextButton.remove();
+        }
+
+        // Ajouter des boutons pour la navigation entre les médias
+        const prevButton = createPrevButton();
+        lightbox.appendChild(prevButton);
+
+        const nextButton = createNextButton();
+        lightbox.appendChild(nextButton);
     }
 
     // Afficher le premier média lors de l'ouverture de la Lightbox
     displayMedia(currentIndex);
 
-    // Ajouter des boutons pour la navigation entre les médias
-    const prevButton = document.createElement("button");
-    prevButton.innerHTML = "<";
-    prevButton.classList.add("nav-button", "left");
-    prevButton.addEventListener("click", () => {
-         currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
-        console.log(currentIndex);
-        displayMedia(currentIndex);
-    });
-    lightbox.appendChild(prevButton);
+    // Fonction pour créer le bouton précédent
+    function createPrevButton() {
+        const prevButton = document.createElement("button");
+        prevButton.innerHTML = "<";
+        prevButton.classList.add("nav-button", "left");
+        prevButton.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
+            displayMedia(currentIndex);
+        });
+        return prevButton;
+    }
 
-    const nextButton = document.createElement("button");
-    nextButton.innerHTML = ">";
-    nextButton.classList.add("nav-button", "right");
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
-        displayMedia(currentIndex);
-    });
-    lightbox.appendChild(nextButton);
+    // Fonction pour créer le bouton suivant
+    function createNextButton() {
+        const nextButton = document.createElement("button");
+        nextButton.innerHTML = ">";
+        nextButton.classList.add("nav-button", "right");
+        nextButton.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
+            displayMedia(currentIndex);
+        });
+        return nextButton;
+    }
 
     // Ajouter la Lightbox à la page
     document.body.appendChild(lightbox);

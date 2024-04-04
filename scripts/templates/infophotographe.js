@@ -1,3 +1,4 @@
+
 // Fonction pour afficher les informations du photographe sur la page HTML
 function displayPhotos(photographer) {
     const infoPhotographe = document.querySelector(".photograph-header");
@@ -52,5 +53,6 @@ function displayPhotos(photographer) {
           
       })
     })
+    
     
   }
