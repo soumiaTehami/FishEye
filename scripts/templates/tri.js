@@ -1,7 +1,8 @@
 // Fonction pour trier les éléments de média
-function sortMediaElements(sortBy, dataMedia, namePhotographe) {
+function sortMediaElements(sortBy, dataMedia, namePhotograph) {
   const gallery = document.getElementById('photographer_gallery');
   const mediaElements = dataMedia.slice(); // Copie le tableau de données pour éviter la modification de l'original
+  console.log(mediaElements);
 
   // Trie les éléments en fonction de la propriété spécifiée (titre, date, likes)
   mediaElements.sort((a, b) => {
@@ -16,14 +17,14 @@ function sortMediaElements(sortBy, dataMedia, namePhotographe) {
       return 0;
     }
   });
-
+  console.log(mediaElements);
   // Crée un nouvel ordre d'affichage
   const newGallery = document.createElement('div');
   newGallery.id = 'photographer_gallery';
 
   // Ajoute les médias triés au nouvel élément de galerie
   mediaElements.forEach((media) => {
-    const mediaElement = createMediaElement(media, namePhotographe); // Utilise la fonction createMediaElement pour créer un élément de média
+    const mediaElement = createMediaElement(media, namePhotograph); // Utilise la fonction createMediaElement pour créer un élément de média
     newGallery.appendChild(mediaElement);
   });
 
@@ -31,8 +32,8 @@ function sortMediaElements(sortBy, dataMedia, namePhotographe) {
   gallery.parentNode.replaceChild(newGallery, gallery);
 }
 
-// Fonction pour créer un élément de média (image ou vidéo)
-function createMediaElement(media, namePhotographe) {
+function createMediaElement(media, namePhotograph) {
+   
   // Créer le conteneur pour le média
   const mediaContainer = document.createElement("div");
   mediaContainer.classList.add("media-element");
@@ -41,7 +42,7 @@ function createMediaElement(media, namePhotographe) {
     const imageDiv = document.createElement("div");
     imageDiv.classList.add("image-wrapper");
     const img = document.createElement("img");
-    img.src = `assets/images/${namePhotographe}/${media.image}`;
+    img.src = `assets/images/${namePhotograph}/${media.image}`;
     img.alt = media.title;
     imageDiv.appendChild(img);
     mediaContainer.appendChild(imageDiv);
@@ -49,7 +50,7 @@ function createMediaElement(media, namePhotographe) {
     const imageDiv = document.createElement("div");
     imageDiv.classList.add("image-wrapper");
     const video = document.createElement("video");
-    video.src = `assets/images/${namePhotographe}/${media.video}`;
+    video.src = `assets/images/${namePhotograph}/${media.video}`;
     video.alt = media.title;
     video.controls = true;
     imageDiv.appendChild(video);
@@ -72,31 +73,30 @@ function createMediaElement(media, namePhotographe) {
     const titleParagraph = document.createElement("p");
     titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
     titleDiv.appendChild(titleParagraph);
+    
   }
+  const titleAndLikeContainer = document.createElement("div");
+titleAndLikeContainer.classList.add("title-and-like-container");
 
-  // Créer une div pour les likes
-  const likeDiv = document.createElement("div");
-  const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
-  mediaContainer.dataset.likes = likeCount;
-  const likeCountSpan = document.createElement("span");
-  likeCountSpan.textContent = `${media.likes || 0} `;
-  likeDiv.appendChild(likeCountSpan);
+const likeDiv = document.createElement("div");
+const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
+mediaContainer.dataset.likes = likeCount;
+const likeCountSpan = document.createElement("span");
+likeCountSpan.textContent = `${media.likes || 0} `;
+likeDiv.appendChild(likeCountSpan);
 
-  // Créer le bouton de like
-  const likeButton = document.createElement("button");
-  likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
-  likeButton.classList.add("like-button");
-  likeButton.addEventListener("click", () => {
-    media.likes = (media.likes || 0) + 1;
-    likeCountSpan.textContent = `${media.likes}`;
-    likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
-  });
-  likeDiv.appendChild(likeButton);
-
-  // Ajouter le conteneur des likes au conteneur du titre
-  titleDiv.appendChild(likeDiv);
-
-  return mediaContainer;
+const likeButton = document.createElement("button");
+likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
+likeButton.classList.add("like-button");
+likeButton.addEventListener("click", () => {
+  media.likes = (media.likes || 0) + 1;
+  likeCountSpan.textContent = `${media.likes}`;
+  likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
+});
+likeDiv.appendChild(likeButton);
+titleAndLikeContainer.appendChild(likeDiv);
+titleDiv.appendChild(titleAndLikeContainer);
+return mediaContainer;
 }
 
 export { sortMediaElements };
