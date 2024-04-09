@@ -1,64 +1,102 @@
-// Fonction pour trier les médias par titre
-function sortByTitle(media) {
-    return media.slice().sort((a, b) => (a.title || '').localeCompare(b.title || ''));
-}
+// Fonction pour trier les éléments de média
+function sortMediaElements(sortBy, dataMedia, namePhotographe) {
+  const gallery = document.getElementById('photographer_gallery');
+  const mediaElements = dataMedia.slice(); // Copie le tableau de données pour éviter la modification de l'original
 
-// Fonction pour trier les médias par date
-function sortByDate(media) {
-    return media.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
-}
-
-// Fonction pour trier les médias par nombre de likes
-function sortByLikes(media) {
-    return media.slice().sort((a, b) => (a.likes || 0) - (b.likes || 0));
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.getElementById("sort-by-dropdown");
-    const mediaContainer = document.querySelector(".media-gallery"); // Correction : utiliser ".media-gallery" au lieu de ".media-element"
-
-    // Appel initial pour trier les médias lors du chargement de la page
-    sortMedia(media);
-
-    dropdown.addEventListener("change", function () {
-        sortMedia(media);
-    });
-
-    function sortMedia(media) {
-        const selectedValue = dropdown.value;
-        let sortedMedia;
-
-        switch (selectedValue) {
-            case "date":
-                sortedMedia = sortByDate(media);
-                break;
-            case "title":
-                sortedMedia = sortByTitle(media);
-                break;
-            case "likes":
-                sortedMedia = sortByLikes(media);
-                break;
-            default:
-                sortedMedia = media;
-        }
-
-        // Vérifier si le conteneur des médias existe
-        if (mediaContainer) {
-            // Vider le conteneur des médias
-            clearMediaContainer(mediaContainer);
-
-            // Mettre à jour l'affichage des médias triés
-            sortedMedia.forEach((media) => {
-                const mediaElement = createMediaElement(media, namePhotographe);
-                mediaContainer.appendChild(mediaElement);
-            });
-        } else {
-            console.error("Le conteneur des médias est null.");
-        }
+  // Trie les éléments en fonction de la propriété spécifiée (titre, date, likes)
+  mediaElements.sort((a, b) => {
+    if (sortBy === 'date') {
+      return new Date(b.date) - new Date(a.date);
+    } else if (sortBy === 'likes') {
+      return (b.likes || 0) - (a.likes || 0); // Tri en fonction du nombre de likes, en prenant en compte le cas où la propriété likes est absente
+    } else if (sortBy === 'title') {
+      return a.title.localeCompare(b.title);
+    } else {
+      // Si la propriété de tri n'est pas reconnue, maintient l'ordre existant
+      return 0;
     }
+  });
 
-    // Fonction pour vider le conteneur des médias
-    function clearMediaContainer(container) {
-        container.innerHTML = "";
-    }
-});
+  // Crée un nouvel ordre d'affichage
+  const newGallery = document.createElement('div');
+  newGallery.id = 'photographer_gallery';
+
+  // Ajoute les médias triés au nouvel élément de galerie
+  mediaElements.forEach((media) => {
+    const mediaElement = createMediaElement(media, namePhotographe); // Utilise la fonction createMediaElement pour créer un élément de média
+    newGallery.appendChild(mediaElement);
+  });
+
+  // Remplace l'ancienne galerie par la nouvelle
+  gallery.parentNode.replaceChild(newGallery, gallery);
+}
+
+// Fonction pour créer un élément de média (image ou vidéo)
+function createMediaElement(media, namePhotographe) {
+  // Créer le conteneur pour le média
+  const mediaContainer = document.createElement("div");
+  mediaContainer.classList.add("media-element");
+
+  if (media.image) {
+    const imageDiv = document.createElement("div");
+    imageDiv.classList.add("image-wrapper");
+    const img = document.createElement("img");
+    img.src = `assets/images/${namePhotographe}/${media.image}`;
+    img.alt = media.title;
+    imageDiv.appendChild(img);
+    mediaContainer.appendChild(imageDiv);
+  } else if (media.video) {
+    const imageDiv = document.createElement("div");
+    imageDiv.classList.add("image-wrapper");
+    const video = document.createElement("video");
+    video.src = `assets/images/${namePhotographe}/${media.video}`;
+    video.alt = media.title;
+    video.controls = true;
+    imageDiv.appendChild(video);
+    mediaContainer.appendChild(imageDiv);
+  } else {
+    // Gestion pour les autres types de médias
+    console.error("Type de média non pris en charge:", media.type);
+    // Vous pouvez afficher un message d'erreur ou créer un élément générique pour ce type de média
+    const unsupportedMedia = document.createElement("p");
+    unsupportedMedia.textContent = "Type de média non pris en charge";
+    mediaContainer.appendChild(unsupportedMedia);
+  }
+
+  // Créer une div pour le titre
+  const titleDiv = document.createElement("div");
+  titleDiv.classList.add("media-title");
+  mediaContainer.appendChild(titleDiv);
+
+  if (media.title) {
+    const titleParagraph = document.createElement("p");
+    titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
+    titleDiv.appendChild(titleParagraph);
+  }
+
+  // Créer une div pour les likes
+  const likeDiv = document.createElement("div");
+  const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
+  mediaContainer.dataset.likes = likeCount;
+  const likeCountSpan = document.createElement("span");
+  likeCountSpan.textContent = `${media.likes || 0} `;
+  likeDiv.appendChild(likeCountSpan);
+
+  // Créer le bouton de like
+  const likeButton = document.createElement("button");
+  likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
+  likeButton.classList.add("like-button");
+  likeButton.addEventListener("click", () => {
+    media.likes = (media.likes || 0) + 1;
+    likeCountSpan.textContent = `${media.likes}`;
+    likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
+  });
+  likeDiv.appendChild(likeButton);
+
+  // Ajouter le conteneur des likes au conteneur du titre
+  titleDiv.appendChild(likeDiv);
+
+  return mediaContainer;
+}
+
+export { sortMediaElements };

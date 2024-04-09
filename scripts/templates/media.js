@@ -40,6 +40,7 @@ function createMediaElement(media, namePhotographe) {
       const titleParagraph = document.createElement("p");
       titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
       titleDiv.appendChild(titleParagraph);
+      
     }
     const titleAndLikeContainer = document.createElement("div");
   titleAndLikeContainer.classList.add("title-and-like-container");
@@ -62,11 +63,6 @@ function createMediaElement(media, namePhotographe) {
   likeDiv.appendChild(likeButton);
   titleAndLikeContainer.appendChild(likeDiv);
   titleDiv.appendChild(titleAndLikeContainer);
-  // Ajouter un événement de clic pour ouvrir la Lightbox
-  // mediaContainer.firstChild.addEventListener("click", () => {
-  //   const lightbox = createLightbox([media], namePhotographe);
-  //   document.body.appendChild(lightbox);
-  // });
   return mediaContainer;
 }
 
