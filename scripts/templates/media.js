@@ -1,6 +1,5 @@
 // Fonction pour créer un élément de média (image ou vidéo)
 function createMediaElement(media, namePhotographe) {
-   
     // Créer le conteneur pour le média
     const mediaContainer = document.createElement("div");
     mediaContainer.classList.add("media-element");
@@ -40,29 +39,44 @@ function createMediaElement(media, namePhotographe) {
       const titleParagraph = document.createElement("p");
       titleParagraph.textContent = `${media.title} `; // Supposant que le prix est en euros
       titleDiv.appendChild(titleParagraph);
-      
     }
+
+    // Ajouter la date
+    if (media.date) {
+      const dateParagraph = document.createElement("p");
+      dateParagraph.textContent = `Date: ${media.date}`; // Ajouter la date ici
+      dateParagraph.classList.add("hidden-date");
+      mediaContainer.appendChild(dateParagraph);
+    }
+
+    // Créer un conteneur pour le titre et le nombre de likes
     const titleAndLikeContainer = document.createElement("div");
-  titleAndLikeContainer.classList.add("title-and-like-container");
+    titleAndLikeContainer.classList.add("title-and-like-container");
 
-  const likeDiv = document.createElement("div");
-  const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
-  mediaContainer.dataset.likes = likeCount;
-  const likeCountSpan = document.createElement("span");
-  likeCountSpan.textContent = `${media.likes || 0} `;
-  likeDiv.appendChild(likeCountSpan);
+    // Créer un conteneur pour le nombre de likes
+    const likeDiv = document.createElement("div");
+    const likeCount = media.likes || 0; // Récupérer le nombre de likes ou définir à 0 s'il n'y en a pas
+    mediaContainer.dataset.likes = likeCount;
+    const likeCountSpan = document.createElement("span");
+    likeCountSpan.textContent = `${media.likes || 0} `;
+    likeDiv.appendChild(likeCountSpan);
 
-  const likeButton = document.createElement("button");
-  likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
-  likeButton.classList.add("like-button");
-  likeButton.addEventListener("click", () => {
-    media.likes = (media.likes || 0) + 1;
-    likeCountSpan.textContent = `${media.likes}`;
-    likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
-  });
-  likeDiv.appendChild(likeButton);
-  titleAndLikeContainer.appendChild(likeDiv);
-  titleDiv.appendChild(titleAndLikeContainer);
-  return mediaContainer;
+    // Créer un bouton de like
+    const likeButton = document.createElement("button");
+    likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
+    likeButton.classList.add("like-button");
+    likeButton.addEventListener("click", () => {
+      media.likes = (media.likes || 0) + 1;
+      likeCountSpan.textContent = `${media.likes}`;
+      likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
+    });
+    likeDiv.appendChild(likeButton);
+
+    // Ajouter le conteneur de likes au conteneur de titre et likes
+    titleAndLikeContainer.appendChild(likeDiv);
+
+    // Ajouter le conteneur de titre et likes au conteneur principal
+    titleDiv.appendChild(titleAndLikeContainer);
+
+    return mediaContainer;
 }
-
