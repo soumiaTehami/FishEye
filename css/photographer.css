@@ -249,10 +249,7 @@ h2 {
   text-align: left;
 }
 
-.dropdown_content li button:hover,
-.dropdown_content li button:focus,
-.btn_drop:hover,
-.btn_drop:focus {
+.dropdown_content li button:focus{
   background-color: #901c1c;
   color: #000;
 }
@@ -265,9 +262,7 @@ h2 {
 .dropdown_content.show {
   display: block;
 }
-.show {
-  display: block;
-}
+
 .dropdown_content li {
   position: relative;
   width: 150px;
@@ -280,6 +275,12 @@ h2 {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+button {
+  background-color: transparent;
+  cursor: pointer;
+  outline: none; 
+  border: none;
 }
 
 
