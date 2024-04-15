@@ -1,8 +1,8 @@
-import { sortMediaElements } from "../templates/tri.js";
+
 // Extraire l'ID du photographe de l'URL
 const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
-let dataMedia=[];
+
 // Fonction pour récupérer les données du photographe depuis le fichier JSON
 async function getPhotographerData(id) {
   try {
@@ -13,7 +13,7 @@ async function getPhotographerData(id) {
     );
 
     const media = data.media.filter((media) => media.photographerId == id);
-     dataMedia=media;
+
     if (photographer && media) {
       // Ajout de la récupération du tarif
       const tarif = photographer.price;
@@ -53,9 +53,5 @@ getPhotographerData(id)
       error
     );
   });
-  
+
 // Événement de changement pour le menu déroulant de tri
-document.getElementById('sort-by-dropdown').addEventListener('change', function () {
-  const sortBy = this.value;
-  sortMediaElements(sortBy, dataMedia);
-});

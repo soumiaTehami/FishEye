@@ -34,5 +34,31 @@ function sortMediaElements(sortBy) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const filterMenuButton = document.querySelector(".btn_drop");
+  const chevron = document.querySelector(".fa-chevron-up");
+  const filterOptions = document.querySelectorAll(".dropdown_content li button");
 
-export { sortMediaElements };
+  // Ajout d'un écouteur d'événement pour le clic sur le bouton de menu
+  filterMenuButton.addEventListener("click", () => {
+    const filterMenu = document.querySelector(".dropdown_content");
+    filterMenu.classList.toggle("show");
+    chevron.classList.toggle("rotate-chevron");
+  });
+
+  // Ajout d'un écouteur d'événement pour le clic sur les options de tri
+  filterOptions.forEach((button) => {
+    button.addEventListener("click", () => {
+      const sortBy = button.getAttribute("value");
+      sortMediaElements(sortBy);
+
+      const currentFilterText = button.textContent;
+      document.getElementById("current_filter").textContent = currentFilterText;
+
+      const filterMenu = document.querySelector(".dropdown_content");
+      const chevron = document.querySelector(".fa-chevron-up");
+      filterMenu.classList.remove("show");
+      chevron.classList.remove("rotate-chevron");
+    });
+  });
+});

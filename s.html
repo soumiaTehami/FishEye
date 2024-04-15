@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Menu</title>
+  <style>
+    .dropdown_content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .dropdown_content.show {
+      display: block;
+    }
+
+    .dropdown_content li::before {
+      content: "";
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      height: 1px;
+      background-color: #fff;
+    }
+
+    .btn_drop,
+    .dropdown_content li button {
+      height: 50px;
+      padding: 15px;
+      font-size: clamp(1.8rem, 2vw, 2rem);
+      color: #fff;
+    }
+
+    .btn_drop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 150px;
+      background-color: #901c1c;
+    }
+
+    .dropdown_content li button {
+      width: 100%;
+      text-align: left;
+    }
+
+    .dropdown_content li button:hover,
+    .dropdown_content li button:focus,
+    .btn_drop:hover,
+    .btn_drop:focus {
+      background-color: #db8876;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tri">
+  <div class="main_content_filter">
+    <h2>Trier par</h2>
+    <div class="filter_section">
+      <div id="sort-by-dropdown">
+        <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false"
+                aria-controls="filter-options" aria-label="Sort by" onclick="toggleDropdown()">
+          <span value="likes" class="option" id="popularite">Popularité</span>
+          <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown_content" aria-hidden="true" id="filter-options">
+          <li role="option">
+            <button type="button" tabindex="-1" aria-label="Sort by popularity" value="likes" class="option"
+                    id="popularite">Popularité</button>
+          </li>
+          <li role="option">
+            <button type="button" tabindex="-1" aria-label="Sort by title" value="title" class="option"
+                    id="titre">Titre</button>
+          </li>
+          <li role="option">
+            <button type="button" tabindex="-1" aria-label="Sort by date" value="date" class="option"
+                    id="date">Date</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById('filter-options');
+    dropdown.classList.toggle('show');
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.matches('.btn_drop')) {
+      var dropdowns = document.getElementsByClassName("dropdown_content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

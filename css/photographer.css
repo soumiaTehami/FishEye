@@ -162,30 +162,37 @@ form input {
     font-size: 25px;
     margin: 0;
 }
+/* MEDIA FILTER */
+.main_content_filter {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  gap: 10px;
+}
+
+h2 {
+  font-weight: 100;
+  font-size: clamp(1.6rem, 3vw, 1.8rem);
+}
+
+.filter_section {
+  position: relative;
+  height: 100%;
+}
+
 #sort-by-dropdown {
-  background-color: #901C1C;
-  color: white;;
-  border: none;
+  z-index: 10;
+  position: absolute;
   border-radius: 5px;
 
-  cursor: pointer;
-  font-size: 18px;
-  margin-left: 30px;
-  overflow: hidden;
-  padding: 17px 25px 30px 30px;
-  width: 160px;
- 
 }
 
-
-
-
-.tri{
-align-items: center;
-display: flex;
-padding: 30px;
-
+.tri {
+  align-items: center;
+  display: flex;
+  padding: 30px;
 }
+
 /* Style général pour la galerie */
 #photographer_gallery {
   display: grid;
@@ -194,6 +201,86 @@ padding: 30px;
   padding: 20px;
 }
 
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* MEDIA FILTER */
+.dropdown_content {
+  max-height: 0;
+  background-color: #901C1C;
+  overflow: hidden; /* Pour cacher le contenu dépassant de la hauteur maximale */
+  transition: max-height 0.3s ease; /* Ajout d'une transition pour une animation fluide */
+}
+
+.dropdown_content.show {
+  max-height: 200px; /* Hauteur maximale du menu déroulant */
+}
+
+.dropdown_content li::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 1px;
+  background-color: #fff;
+}
+
+.btn_drop,
+.dropdown_content li button {
+  height: 50px;
+  padding: 15px;
+  font-size: clamp(1.8rem, 2vw, 2rem);
+  color: #fff;
+}
+
+.btn_drop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px;
+  background-color: #901c1c;
+}
+
+.dropdown_content li button {
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown_content li button:hover,
+.dropdown_content li button:focus,
+.btn_drop:hover,
+.btn_drop:focus {
+  background-color: #901c1c;
+  color: #000;
+}
+
+/* Ajout du style pour la rotation du chevron */
+.rotate-chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown_content.show {
+  display: block;
+}
+.show {
+  display: block;
+}
+.dropdown_content li {
+  position: relative;
+  width: 150px;
+}
+
+/* Reset des styles par défaut */
+#sort-by-dropdown *, 
+#sort-by-dropdown ::before, 
+#sort-by-dropdown ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 
 /* Style pour les images et vidéos */
