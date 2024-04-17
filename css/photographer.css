@@ -183,7 +183,7 @@ h2 {
 #sort-by-dropdown {
   z-index: 10;
   position: absolute;
-  border-radius: 5px;
+  
 
 }
 
@@ -217,7 +217,7 @@ h2 {
   max-height: 200px; /* Hauteur maximale du menu déroulant */
 }
 
-.dropdown_content li::before {
+.dropdown_content li button::before {
   content: "";
   position: absolute;
   top: 0px;
@@ -232,7 +232,7 @@ h2 {
 .dropdown_content li button {
   height: 50px;
   padding: 15px;
-  font-size: clamp(1.8rem, 2vw, 2rem);
+  font-size: clamp(1.4rem, 1vw, 2rem);
   color: #fff;
 }
 
@@ -241,6 +241,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   width: 160px;
+  border-radius: 5px 5px 0 0;
   background-color: #901c1c;
 }
 
@@ -272,9 +273,9 @@ h2 {
 #sort-by-dropdown *, 
 #sort-by-dropdown ::before, 
 #sort-by-dropdown ::after {
-  box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding-left: 2px;
+  
 }
 button {
   background-color: transparent;

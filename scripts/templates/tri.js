@@ -33,7 +33,19 @@ function sortMediaElements(sortBy) {
     gallery.appendChild(mediaElement);
   });
 }
-
+function updateListetributton(){
+  const filterOptions = document.querySelectorAll(".dropdown_content li button");
+  const current_filter= document.getElementById("current_filter")
+  filterOptions.forEach((button) => {
+  if(button.textContent==document.getElementById("current_filter").textContent){
+   button.style.display="none";
+  }
+  else{
+    button.style.display="block";
+  }
+ 
+})
+}
 document.addEventListener("DOMContentLoaded", function () {
   const filterMenuButton = document.querySelector(".btn_drop");
   const chevron = document.querySelector(".fa-chevron-up");
@@ -44,19 +56,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterMenu = document.querySelector(".dropdown_content");
     filterMenu.classList.toggle("show");
     chevron.classList.toggle("rotate-chevron");
+      updateListetributton();
   });
 
   // Ajout d'un écouteur d'événement pour le clic sur les options de tri
   filterOptions.forEach((button) => {
+   
+    // updateListetributton();
     button.addEventListener("click", () => {
       const sortBy = button.getAttribute("value");
       sortMediaElements(sortBy);
+      updateListetributton();
 
       const currentFilterText = button.textContent;
       document.getElementById("current_filter").textContent = currentFilterText;
 
       const filterMenu = document.querySelector(".dropdown_content");
-      const chevron = document.querySelector(".fa-chevron-up");
+    
       filterMenu.classList.remove("show");
       chevron.classList.remove("rotate-chevron");
     });
