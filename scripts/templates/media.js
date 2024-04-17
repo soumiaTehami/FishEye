@@ -1,4 +1,3 @@
-// Fonction pour créer un élément de média (image ou vidéo)
 function createMediaElement(media, namePhotographe) {
     // Créer le conteneur pour le média
     const mediaContainer = document.createElement("div");
@@ -62,14 +61,25 @@ function createMediaElement(media, namePhotographe) {
     likeDiv.appendChild(likeCountSpan);
 
     // Créer un bouton de like
-    const likeButton = document.createElement("button");
-    likeButton.textContent = "❤️"; // Utilisation de l'icône de cœur
+    const likeButton = document.createElement("button"); // Création du bouton de like
     likeButton.classList.add("like-button");
+
+    // Création d'un conteneur span pour le cœur
+    const heartIcon = document.createElement("span");
+    heartIcon.textContent = "❤️"; // Utilisation de l'icône de cœur
+
+    // Ajout d'une classe pour identifier le cœur et appliquer un style CSS
+    heartIcon.classList.add("heart-icon");
+    heartIcon.style.color = "#901c1c"; // Changer la couleur du cœur en rouge foncé
+
+    likeButton.appendChild(heartIcon);
+
     likeButton.addEventListener("click", () => {
       media.likes = (media.likes || 0) + 1;
       likeCountSpan.textContent = `${media.likes}`;
       likeButton.disabled = true; // Désactiver le bouton de like une fois cliqué
     });
+
     likeDiv.appendChild(likeButton);
 
     // Ajouter le conteneur de likes au conteneur de titre et likes

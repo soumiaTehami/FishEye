@@ -1,5 +1,3 @@
-// Ajoutez l'écouteur d'événements à chaque élément multimédia
-
 function createLightbox(index, mediaList, photographerName) {
   const lightbox = document.createElement("div");
   lightbox.classList.add("lightbox");
@@ -88,6 +86,19 @@ function createLightbox(index, mediaList, photographerName) {
 
   // Ajouter la Lightbox à la page
   document.body.appendChild(lightbox);
+
+  // Gestion des touches du clavier
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      // Aller au média précédent
+      currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length;
+      displayMedia(currentIndex);
+    } else if (event.key === "ArrowRight") {
+      // Aller au média suivant
+      currentIndex = (currentIndex + 1) % mediaList.length;
+      displayMedia(currentIndex);
+    }
+  });
 
   return lightbox;
 }
