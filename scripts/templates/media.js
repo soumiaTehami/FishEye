@@ -1,4 +1,4 @@
-function createMediaElement(media, namePhotographe) {
+export function createMediaElement(media, namePhotographe) {
     // Créer le conteneur pour le média
     const mediaContainer = document.createElement("div");
     mediaContainer.classList.add("media-element");

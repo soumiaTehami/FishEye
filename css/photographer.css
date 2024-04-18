@@ -15,6 +15,7 @@
   margin-bottom: 20px;
 }
 
+
 label {
   display: block;
   margin-bottom: 5px;
@@ -28,6 +29,7 @@ textarea {
   border-radius: 5px;
 }
 
+
 textarea {
   height: 100px;
 }
@@ -39,43 +41,6 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-/* Media query pour les petits écrans */
-@media screen and (max-width: 600px) {
-  /* Réduire la marge supérieure pour laisser plus de place sur les petits écrans */
-  #contact_modal {
-    padding-top: 20px;
-  }
-}
-
-/* Media query pour les écrans moyens */
-@media screen and (min-width: 601px) and (max-width: 1024px) {
-  /* Réduire la largeur du formulaire pour les écrans moyens */
-  .form-group {
-    width: 50%;
-    float: left;
-    margin-right: 10px; /* Ajouter une marge à droite pour séparer les champs */
-  }
-
-  /* Assurer que chaque deuxième groupe de formulaire commence sur une nouvelle ligne */
-  .form-group:nth-child(even) {
-    clear: both;
-  }
-}
-
-/* Media query pour les grands écrans */
-@media screen and (min-width: 1025px) {
-  /* Diviser le formulaire en trois colonnes pour les grands écrans */
-  .form-group {
-    width: 33.33%;
-    float: left;
-    margin-right: 10px; /* Ajouter une marge à droite pour séparer les champs */
-  }
-
-  /* Assurer que chaque troisième groupe de formulaire commence sur une nouvelle ligne */
-  .form-group:nth-child(3n) {
-    clear: both;
-  }
 }
 
 
@@ -125,14 +90,32 @@ button[type="submit"] {
 }
 
 .modal header {
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
     width: 100%;
 }
 
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
+
 }
+/* Pour les petits écrans */
+@media screen and (max-width: 600px) {
+  .modal header {
+      display: flex;
+      flex-direction:row;
+      
+  }
+
+  .modal header h2 {
+      margin-top: auto; /* Place le texte en bas de l'en-tête */
+  }
+}
+
+
+
+
 
 .modal header h2 {
     font-size: 64px;
@@ -169,8 +152,7 @@ form input {
     border-radius: 5px;
 }
 
-
-
+  
 .photograph-header img {
     max-width: 50%;
     float: right; /* La propriété float permet de faire flotter l'élément à droite */
@@ -215,8 +197,6 @@ form input {
  
   
   .contact_button {
-    
-    
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -227,9 +207,10 @@ form input {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index:1;
-  }
+    transform: translate(-50%, -30%);
+    z-index: 1;
+}
+
   .details-paragraph{
     color: #901c1c;
     font-size: 25px;

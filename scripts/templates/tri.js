@@ -35,7 +35,6 @@ function sortMediaElements(sortBy) {
 }
 function updateListetributton(){
   const filterOptions = document.querySelectorAll(".dropdown_content li button");
-  const current_filter= document.getElementById("current_filter")
   filterOptions.forEach((button) => {
   if(button.textContent==document.getElementById("current_filter").textContent){
    button.style.display="none";

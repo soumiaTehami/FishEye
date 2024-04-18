@@ -1,4 +1,4 @@
-function createLightbox(index, mediaList, photographerName) {
+export function createLightbox(index, mediaList, photographerName) {
   const lightbox = document.createElement("div");
   lightbox.classList.add("lightbox");
   let currentIndex = index; // Index du média actuellement affiché

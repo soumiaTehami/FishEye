@@ -1,4 +1,4 @@
-function displayTarif(tarif) {
+export function displayTarif(tarif) {
     const tarifContainer = document.querySelector(".tarif-container");
     const tarifLikesContainer = document.createElement("div");
     tarifLikesContainer.classList.add("tarif-likes-container");

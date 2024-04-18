@@ -1,6 +1,9 @@
+import {createLightbox} from "../templates/LightBox.js";
+import { createMediaElement } from "../templates/media.js";
+
 
 // Fonction pour afficher les informations du photographe sur la page HTML
-function displayPhotos(photographer) {
+export function displayPhotos(photographer) {
     const infoPhotographe = document.querySelector(".photograph-header");
   
     // Créer le conteneur pour les détails du photographe
@@ -33,7 +36,7 @@ function displayPhotos(photographer) {
   }
   
   // Fonction pour afficher les médias du photographe
-  function displayMedia(mediaContainer, photographerData) {
+  export function displayMedia(mediaContainer, photographerData) {
     // Parcourir tous les médias du photographe
     photographerData.media.forEach((mediaItem) => {
       // Créer un élément de média approprié en fonction du type (image ou vidéo)

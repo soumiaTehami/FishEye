@@ -1,4 +1,4 @@
-function photographerTemplate(data) {
+export function photographerTemplate(data) {
     const { id,name, portrait, tagline, price, country } = data;
 
     const picture = `assets/photographers/${portrait}`;
@@ -47,3 +47,5 @@ function photographerTemplate(data) {
 }
 
 const searchParams = new URLSearchParams(window.location.search);
+const paramName = searchParams.get("paramName");
+console.log(paramName);

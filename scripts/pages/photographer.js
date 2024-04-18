@@ -1,4 +1,5 @@
-
+import { displayPhotos,displayMedia} from "../templates/infophotographe.js";
+import {displayTarif} from "../templates/Tarif.js";
 // Extraire l'ID du photographe de l'URL
 const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
