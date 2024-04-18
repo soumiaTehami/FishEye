@@ -1,8 +1,10 @@
+// Affichage du modal
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 }
 
+// Fermeture du modal
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
@@ -40,6 +42,7 @@ function validateForm() {
     return true;
 }
 
+// Soumission du formulaire
 function handleSubmit(event) {
     event.preventDefault(); // Empêcher le comportement par défaut du formulaire
     if (validateForm()) {
@@ -53,6 +56,7 @@ function handleSubmit(event) {
     }
 }
 
-// Ajouter un écouteur d'événement pour la soumission du formulaire
+// Ajout d'un écouteur d'événement pour la soumission du formulaire
 const contactForm = document.getElementById('contact_form');
 contactForm.addEventListener('submit', handleSubmit);
+

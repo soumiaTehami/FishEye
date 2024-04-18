@@ -11,8 +11,8 @@ async function getPhotographerData(id) {
     const data = await response.json();
     const photographer = data.photographers.find(
       (photographer) => photographer.id == id
+     
     );
-
     const media = data.media.filter((media) => media.photographerId == id);
 
     if (photographer && media) {
@@ -29,6 +29,20 @@ async function getPhotographerData(id) {
     );
   }
 }
+async function addHeaderToModal() {
+  try {
+    const photographerData = await getPhotographerData(id);
+    const photographerName = photographerData.photographer.name;
+
+    const modalHeader = document.querySelector(".modal_form_name");
+    modalHeader.innerHTML = `<h1>${photographerName}</h1>`;
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de l'en-tête au modal :", error);
+  }
+}
+
+// Appel de la fonction pour ajouter l'en-tête au modal
+addHeaderToModal()
 
 // Appel de la fonction pour récupérer les données du photographe
 getPhotographerData(id)
