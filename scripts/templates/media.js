@@ -66,11 +66,11 @@ export function createMediaElement(media, namePhotographe) {
 
     // Création d'un conteneur span pour le cœur
     const heartIcon = document.createElement("span");
-    heartIcon.textContent = "❤️"; // Utilisation de l'icône de cœur
-
+    heartIcon.textContent =  "\u2764"; // Utilisation de l'icône de cœur
+    heartIcon.style.color = "#901c1c";
     // Ajout d'une classe pour identifier le cœur et appliquer un style CSS
     heartIcon.classList.add("heart-icon");
-    heartIcon.style.color = "#901c1c"; // Changer la couleur du cœur en rouge foncé
+    
 
     likeButton.appendChild(heartIcon);
 

@@ -431,9 +431,13 @@ button {
   cursor: pointer;
   
 }
-.heart-icon-red {
-  color: #901c1c; /* Changer la couleur du cœur en rouge foncé */
+.heart-icon {
+  
+  text-shadow: 0 0 0 #901c1c;
 }
+
+
+
 
 .like-button:hover {
   transform: scale(1.2); /* Effet d'agrandissement au survol */
