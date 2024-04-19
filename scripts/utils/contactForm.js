@@ -55,7 +55,8 @@ function handleSubmit(event) {
         event.target.reset();
     }
 }
-
+displayModal();
+closeModal() ;
 // Ajout d'un écouteur d'événement pour la soumission du formulaire
 const contactForm = document.getElementById('contact_form');
 contactForm.addEventListener('submit', handleSubmit);

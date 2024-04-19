@@ -10,7 +10,7 @@ export function displayTarif(tarif) {
   
     // Création du cœur pour représenter les likes
     const heartSymbol = document.createElement("span");
-    heartSymbol.textContent = " \u2665"; // Caractère Unicode pour un cœur noir
+    heartSymbol.textContent = "\u2764"; // Caractère Unicode pour un cœur noir
     tarifLikesContainer.appendChild(heartSymbol);
   
     // Calcul du nombre total de likes
