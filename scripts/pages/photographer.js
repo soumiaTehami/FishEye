@@ -7,7 +7,7 @@ const id = searchParams.get("id");
 // Fonction pour récupérer les données du photographe depuis le fichier JSON
 async function getPhotographerData(id) {
   try {
-    const response = await fetch(`data/photographers.json`);
+    const response = await fetch("/data/photographers.json");
     const data = await response.json();
     const photographer = data.photographers.find(
       (photographer) => photographer.id == id
