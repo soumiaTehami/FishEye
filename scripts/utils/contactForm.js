@@ -1,17 +1,18 @@
+
 // Affichage du modal
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
-}
+  }
 
-// Fermeture du modal
-function closeModal() {
+  // Fermeture du modal
+  function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
-}
+  }
 
-// Fonction pour vérifier le formulaire avant la soumission
-function validateForm() {
+  // Fonction pour vérifier le formulaire avant la soumission
+  function validateForm() {
     // Récupérer les champs du formulaire
     const firstName = document.getElementById('first_name').value.trim();
     const lastName = document.getElementById('last_name').value.trim();
@@ -20,44 +21,51 @@ function validateForm() {
 
     // Vérifier si les champs sont vides
     if (!firstName || !lastName || !email || !message) {
-        alert('Veuillez remplir tous les champs du formulaire.');
-        return false; // Empêcher la soumission du formulaire
+      alert('Veuillez remplir tous les champs du formulaire.');
+      return false; // Empêcher la soumission du formulaire
     }
 
     // Vérifier que les noms et prénoms ont au moins 2 caractères
     const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ]{2,}$/;
     if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-        alert('Les noms et prénoms doivent avoir au moins 2 caractères alphabétiques.');
-        return false; // Empêcher la soumission du formulaire
+      alert('Les noms et prénoms doivent avoir au moins 2 caractères alphabétiques.');
+      return false; // Empêcher la soumission du formulaire
     }
 
     // Vérifier le format de l'email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Veuillez saisir une adresse email valide.');
-        return false; // Empêcher la soumission du formulaire
+      alert('Veuillez saisir une adresse email valide.');
+      return false; // Empêcher la soumission du formulaire
     }
 
     // Si toutes les validations sont passées, retourner vrai pour autoriser la soumission du formulaire
     return true;
-}
+  }
 
-// Soumission du formulaire
-function handleSubmit(event) {
+  // Soumission du formulaire
+  function handleSubmit(event) {
     event.preventDefault(); // Empêcher le comportement par défaut du formulaire
     if (validateForm()) {
-        const formData = new FormData(event.target); // Récupérer les données du formulaire
-        const formDataObject = Object.fromEntries(formData.entries()); // Convertir les données en objet JavaScript
-        console.log(formDataObject); // Afficher les données dans la console
-        // Ajoutez ici le code pour envoyer les données du formulaire (par exemple, à un serveur)
+      const formData = new FormData(event.target); // Récupérer les données du formulaire
+      const formDataObject = Object.fromEntries(formData.entries()); // Convertir les données en objet JavaScript
+      console.log(formDataObject); // Afficher les données dans la console
+      // Ajoutez ici le code pour envoyer les données du formulaire (par exemple, à un serveur)
 
-        // Réinitialiser le formulaire après la soumission réussie
-        event.target.reset();
+      // Réinitialiser le formulaire après la soumission réussie
+      event.target.reset();
     }
-}
-document.querySelector('.contact_button').addEventListener('click', displayModal);
-document.querySelector('img[src="assets/icons/close.svg"]').addEventListener('click', closeModal);
-// Ajout d'un écouteur d'événement pour la soumission du formulaire
-const contactForm = document.getElementById('contact_form');
-contactForm.addEventListener('submit', handleSubmit);
+  }
+
+  document.querySelector('.contact_button').addEventListener('click', displayModal);
+  document.querySelector('img[src="assets/icons/close.svg"]').addEventListener('click', closeModal);
+  // Ajout d'un écouteur d'événement pour la soumission du formulaire
+  const contactForm = document.getElementById('contact_form');
+  contactForm.addEventListener('submit', handleSubmit);
+
+
+
+
+
+
 
