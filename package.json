@@ -6,8 +6,9 @@
     "globals": "^15.0.0"
   },
   "scripts": {
-    
-      "lint": "eslint --max-warnings=0 scripts/**/*.js"
-  
+    "lint": "eslint --max-warnings=0 scripts/**/*.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }

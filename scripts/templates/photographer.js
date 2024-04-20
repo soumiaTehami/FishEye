@@ -46,6 +46,3 @@ export function photographerTemplate(data) {
     return { name, picture, tagline, price, country, getUserCardDOM };
 }
 
-const searchParams = new URLSearchParams(window.location.search);
-const paramName = searchParams.get("paramName");
-console.log(paramName);

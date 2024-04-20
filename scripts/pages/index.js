@@ -1,40 +1,47 @@
+// Import du modèle de photographe
 import { photographerTemplate } from "../templates/photographer.js";
+
+// Fonction pour récupérer les données des photographes
 async function getPhotographers() {
-  // Code pour récupérer les données des photographes
-    try {
-        const response = await fetch("data/photographers.json");
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des données JSON');
-        }
-        const data = await response.json();
-        return data.photographers;
-    } catch (error) {
-        console.error('Erreur fetch :', error);
-        return []; // Retourner une liste vide en cas d'erreur
+  try {
+    const response = await fetch("data/photographers.json");
+    if (!response.ok) {
+      throw new Error("Erreur de chargement des données des photographes");
     }
-}
-
-
-async function displayData(photographers) {
-  // Vérifier si photographers est défini
-  if (photographers) {
-    const photographersSection = document.querySelector(
-      ".photographer_section"
-    );
-
-    photographers.forEach((photographer) => {
-      const photographerModel = photographerTemplate(photographer);
-      const userCardDOM = photographerModel.getUserCardDOM();
-      photographersSection.appendChild(userCardDOM);
-    });
+    const data = await response.json();
+    return data.photographers;
+  } catch (error) {
+    console.error(error);
+    return []; // Retourne un tableau vide en cas d'erreur
   }
 }
 
-async function init() {
-  // Récupère les datas des photographes
-  const photographers = await getPhotographers();
-  displayData(photographers);
-  console.log(photographers);
+// Fonction pour afficher les données des photographes
+async function displayData(photographers) {
+  try {
+    // Vérifie si photographers est défini
+    if (photographers) {
+      const photographersSection = document.querySelector(".photographer_section");
+      
+      photographers.forEach((photographer) => {
+        const photographerModel = photographerTemplate(photographer);
+        const userCardDOM = photographerModel.getUserCardDOM();
+        photographersSection.appendChild(userCardDOM);
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-init();
+// Fonction d'initialisation
+(async () => {
+  try {
+    // Récupère les données des photographes
+    const photographers = await getPhotographers();
+    await displayData(photographers);
+    console.log(photographers);
+  } catch (error) {
+    console.error(error);
+  }
+})();
