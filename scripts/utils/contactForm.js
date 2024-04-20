@@ -55,8 +55,8 @@ function handleSubmit(event) {
         event.target.reset();
     }
 }
-displayModal();
-closeModal() ;
+document.querySelector('.contact_button').addEventListener('click', displayModal);
+document.querySelector('img[src="assets/icons/close.svg"]').addEventListener('click', closeModal);
 // Ajout d'un écouteur d'événement pour la soumission du formulaire
 const contactForm = document.getElementById('contact_form');
 contactForm.addEventListener('submit', handleSubmit);
