@@ -353,8 +353,8 @@ button {
   object-fit: cover;
   max-height: 200px; /* Limiter la hauteur des médias */
 }
-#photographer_gallery img:focus,
-#photographer_gallery video:focus {
+#photographer_gallery img.focused,
+#photographer_gallery video.focused {
   outline: thick double rosybrown;
 }
 
@@ -533,7 +533,7 @@ button {
 
 .media-container img,
 .media-container video {
-  width: 100%;
+  width: 80%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);

@@ -11,20 +11,40 @@ export function createLightbox(index, mediaList, photographerName) {
     const media = mediaList[index];
 
     if (media.image) {
-      // Afficher l'image
+      const fullscreenImageContainer = document.createElement("div");
+      fullscreenImageContainer.classList.add("media-container");
+
       const fullscreenImage = document.createElement("img");
       fullscreenImage.src = `assets/images/${photographerName}/${media.image}`;
       fullscreenImage.alt = media.title || "";
       fullscreenImage.classList.add("fullscreen-media");
-      lightbox.appendChild(fullscreenImage);
+      fullscreenImageContainer.appendChild(fullscreenImage);
+
+      // Ajouter le titre de l'image
+      const imageTitle = document.createElement("div");
+      imageTitle.textContent = media.title || "";
+      imageTitle.classList.add("media-title");
+      fullscreenImageContainer.appendChild(imageTitle);
+
+      lightbox.appendChild(fullscreenImageContainer);
     } else if (media.video) {
-      // Afficher la vidéo
+      const fullscreenVideoContainer = document.createElement("div");
+      fullscreenVideoContainer.classList.add("media-container");
+
       const fullscreenVideo = document.createElement("video");
       fullscreenVideo.src = `assets/images/${photographerName}/${media.video}`;
       fullscreenVideo.ariaLabel = media.title || "";
       fullscreenVideo.controls = true;
       fullscreenVideo.classList.add("fullscreen-media");
-      lightbox.appendChild(fullscreenVideo);
+      fullscreenVideoContainer.appendChild(fullscreenVideo);
+
+      // Ajouter le titre de la vidéo
+      const videoTitle = document.createElement("div");
+      videoTitle.textContent = media.title || "";
+      videoTitle.classList.add("media-title");
+      fullscreenVideoContainer.appendChild(videoTitle);
+
+      lightbox.appendChild(fullscreenVideoContainer);
     }
 
     const closeButton = document.createElement("button");

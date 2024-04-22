@@ -90,3 +90,13 @@ export function createMediaElement(media, namePhotographe) {
 
     return mediaContainer;
 }
+// Sélectionnez tous les éléments img et video dans la galerie du photographe
+const mediaElements = document.querySelectorAll('#photographer_gallery img, #photographer_gallery video');
+
+// Parcourir tous les éléments et ajouter un gestionnaire d'événements de clic
+mediaElements.forEach(mediaElement => {
+  mediaElement.addEventListener('click', () => {
+    // Ajoutez une classe "focused" à l'élément cliqué
+    mediaElement.classList.add('focused');
+  });
+});
