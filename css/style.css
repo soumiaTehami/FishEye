@@ -36,10 +36,10 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.photographer_section a:focus{
+}.photographer_section a:focus{
     outline: thick double rosybrown;
 }
+
 .photographer_section article {
     justify-self: center;
     display: flex;

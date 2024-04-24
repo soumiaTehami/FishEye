@@ -9,6 +9,7 @@ export function createMediaElement(media, namePhotographe) {
       const img = document.createElement("img");
       img.src = `assets/images/${namePhotographe}/${media.image}`;
       img.alt = media.title;
+      img.tabIndex=0;
       imageDiv.appendChild(img);
       mediaContainer.appendChild(imageDiv);
     } else if (media.video) {
@@ -18,6 +19,7 @@ export function createMediaElement(media, namePhotographe) {
       video.src = `assets/images/${namePhotographe}/${media.video}`;
       video.alt = media.title;
       video.controls = true;
+      video.tabIndex=0;
       imageDiv.appendChild(video);
       mediaContainer.appendChild(imageDiv);
     } else {
@@ -68,6 +70,7 @@ export function createMediaElement(media, namePhotographe) {
     const heartIcon = document.createElement("span");
     heartIcon.textContent =  "\u2764"; // Utilisation de l'icône de cœur
     heartIcon.style.color = "#901c1c";
+    heartIcon.tabIndex=0;
     // Ajout d'une classe pour identifier le cœur et appliquer un style CSS
     heartIcon.classList.add("heart-icon");
     
@@ -90,13 +93,5 @@ export function createMediaElement(media, namePhotographe) {
 
     return mediaContainer;
 }
-// Sélectionnez tous les éléments img et video dans la galerie du photographe
-const mediaElements = document.querySelectorAll('#photographer_gallery img, #photographer_gallery video');
 
-// Parcourir tous les éléments et ajouter un gestionnaire d'événements de clic
-mediaElements.forEach(mediaElement => {
-  mediaElement.addEventListener('click', () => {
-    // Ajoutez une classe "focused" à l'élément cliqué
-    mediaElement.classList.add('focused');
-  });
-});
+
