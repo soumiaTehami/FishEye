@@ -17,11 +17,11 @@ export function displayTarif(tarif) {
     let totalLikes = 0;
     const mediaElements = document.querySelectorAll(".media-element");
   
-    mediaElements.forEach((mediaElement) => {
-      const likeCount = parseInt(mediaElement.dataset.likes);
-      if (!isNaN(likeCount)) {
+mediaElements.forEach((mediaElement) => {
+const likeCount = parseInt(mediaElement.dataset.likes);//convertissant la valeur de l'attribut data-likes en un nombre entier à l'aide de parseInt
+if (!isNaN(likeCount)) {         // Vérifie si likeCount est un nombre
         totalLikes += likeCount;
-      }
+  }
     });
   
     // Mise à jour du contenu du span avec le nombre total de likes
