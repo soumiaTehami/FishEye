@@ -38,6 +38,7 @@ async function addHeaderToModal() {
       throw new Error("Photographe non trouvé");
     }
     const photographerName = photographerData.photographer.name;
+    console.log(photographerName);
     const modalHeader = document.querySelector(".modal_form_name");
     modalHeader.innerHTML = `<h1>${photographerName}</h1>`;
   } catch (error) {
