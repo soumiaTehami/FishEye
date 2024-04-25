@@ -9,7 +9,7 @@ export function createMediaElement(media, namePhotographe) {
       const img = document.createElement("img");
       img.src = `assets/images/${namePhotographe}/${media.image}`;
       img.alt = media.title;
-      img.tabIndex=0;
+      img.tabIndex = 0;
       imageDiv.appendChild(img);
       mediaContainer.appendChild(imageDiv);
     } else if (media.video) {
@@ -19,7 +19,7 @@ export function createMediaElement(media, namePhotographe) {
       video.src = `assets/images/${namePhotographe}/${media.video}`;
       video.alt = media.title;
       video.controls = true;
-      video.tabIndex=0;
+      video.tabIndex = 0;
       imageDiv.appendChild(video);
       mediaContainer.appendChild(imageDiv);
     } else {
@@ -30,7 +30,7 @@ export function createMediaElement(media, namePhotographe) {
       unsupportedMedia.textContent = "Type de média non pris en charge";
       mediaContainer.appendChild(unsupportedMedia);
     }
-  
+    
     // Créer une div pour le titre
     const titleDiv = document.createElement("div");
     titleDiv.classList.add("media-title");
