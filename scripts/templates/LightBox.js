@@ -9,7 +9,6 @@ export function createLightbox(index, mediaList, photographerName) {
     lightbox.innerHTML = "";
 
     const media = mediaList[index];
-
     if (media.image) {
       const fullscreenImageContainer = document.createElement("div");
       fullscreenImageContainer.classList.add("media-container");
