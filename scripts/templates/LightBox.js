@@ -13,7 +13,6 @@ export function createLightbox(index, mediaList, photographerName) {
     if (media.image) {
       const fullscreenImageContainer = document.createElement("div");
       fullscreenImageContainer.classList.add("media-container");
-
       const fullscreenImage = document.createElement("img");
       fullscreenImage.src = `assets/images/${photographerName}/${media.image}`;
       fullscreenImage.alt = media.title || "";
