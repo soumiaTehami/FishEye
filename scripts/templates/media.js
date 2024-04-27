@@ -16,7 +16,7 @@ export function createMediaElement(media, namePhotographe) {
       const imageDiv = document.createElement("div");
       imageDiv.classList.add("image-wrapper");
       const video = document.createElement("video");
-      video.src = `/././assets/images/${namePhotographe}/${media.video}`;
+      video.src = `./assets/images/${namePhotographe}/${media.video}`;
       video.alt = media.title;
       video.controls = true;
       video.tabIndex = 0;
