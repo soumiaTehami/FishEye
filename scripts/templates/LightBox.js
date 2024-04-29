@@ -16,6 +16,7 @@ export function createLightbox(index, mediaList, photographerName) {
       fullscreenImage.src = `assets/images/${photographerName}/${media.image}`;
       fullscreenImage.alt = media.title || "";
       fullscreenImage.classList.add("fullscreen-media");
+      fullscreenImage.tabIndex = 0; // Ajout du tabindex pour rendre l'image accessible au clavier
       fullscreenImageContainer.appendChild(fullscreenImage);
 
       // Ajouter le titre de l'image
@@ -34,6 +35,7 @@ export function createLightbox(index, mediaList, photographerName) {
       fullscreenVideo.ariaLabel = media.title || "";
       fullscreenVideo.controls = true;
       fullscreenVideo.classList.add("fullscreen-media");
+      fullscreenVideo.tabIndex = 0; // Ajout du tabindex pour rendre la vidéo accessible au clavier
       fullscreenVideoContainer.appendChild(fullscreenVideo);
 
       // Ajouter le titre de la vidéo
@@ -46,12 +48,31 @@ export function createLightbox(index, mediaList, photographerName) {
     }
 
     const closeButton = document.createElement("button");
-    closeButton.innerHTML = "&times;";
-    closeButton.classList.add("close-button");
-    closeButton.addEventListener("click", () => {
-      lightbox.remove();
-    });
-    lightbox.appendChild(closeButton);
+closeButton.innerHTML = "&times;";
+closeButton.classList.add("close-button");
+closeButton.tabIndex = "0"; // Permet de rendre le bouton accessible via la navigation au clavier
+closeButton.addEventListener("click", () => {
+  closeLightbox();
+});
+lightbox.appendChild(closeButton);
+
+// Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
+// Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
+closeButton.addEventListener("keydown", (event) => {
+  console.log("Touche pressée :", event.key);
+  if (event.key === "Enter") {
+    console.log("Fermeture de la lightbox...");
+    closeLightbox();
+  }
+});
+
+
+// Fonction pour fermer la lightbox
+function closeLightbox() {
+  lightbox.remove();
+}
+
+    
 
     // Mettre à jour l'index actuel
     currentIndex = index;
