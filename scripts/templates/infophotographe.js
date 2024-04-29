@@ -1,3 +1,4 @@
+
 import { createLightbox } from "../templates/LightBox.js";
 import { createMediaElement } from "../templates/media.js";
 
@@ -46,14 +47,16 @@ export function displayMedia(mediaContainer, photographerData) {
 
     // Ajouter un événement de clic pour ouvrir la lightbox
     mediaElement.addEventListener('click', (e) => {
-      e.preventDefault();
-      const lightbox = createLightbox(index, photographerData.media, photographerData.photographer.name);
-      document.body.appendChild(lightbox);
+      if (!e.target.closest('.like-button')) { // Vérifier si le clic n'a pas été effectué sur un bouton "J'aime" ou un autre élément interactif
+        e.preventDefault();
+        const lightbox = createLightbox(index, photographerData.media, photographerData.photographer.name);
+        document.body.appendChild(lightbox);
+      }
     });
 
     // Ajouter un événement pour la touche Entrée
     mediaElement.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' && !e.target.closest('.like-button')) { // Vérifier si la touche Entrée n'a pas été pressée sur un bouton "J'aime" ou un autre élément interactif
         e.preventDefault();
         const lightbox = createLightbox(index, photographerData.media, photographerData.photographer.name);
         document.body.appendChild(lightbox);
