@@ -1,6 +1,9 @@
 main {
   padding: 0 200px;
 }
+#contact_modal:focus-within button {
+  outline: thick double rosybrown;
+}
 #contact_modal {
   display: none; /* Assurez-vous que la modal est cachée par défaut */
   position: fixed; /* Position fixe pour qu'elle reste au-dessus de la page */
