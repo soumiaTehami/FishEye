@@ -48,31 +48,26 @@ export function createLightbox(index, mediaList, photographerName) {
     }
 
     const closeButton = document.createElement("button");
-closeButton.innerHTML = "&times;";
-closeButton.classList.add("close-button");
-closeButton.tabIndex = "0"; // Permet de rendre le bouton accessible via la navigation au clavier
-closeButton.addEventListener("click", () => {
-  closeLightbox();
-});
-lightbox.appendChild(closeButton);
+    closeButton.innerHTML = "&times;";
+    closeButton.classList.add("close-button");
+    closeButton.tabIndex = "0"; // Permet de rendre le bouton accessible via la navigation au clavier
+    closeButton.addEventListener("click", () => {
+      closeLightbox();
+    });
+    lightbox.appendChild(closeButton);
 
-// Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
-// Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
-closeButton.addEventListener("keydown", (event) => {
-  console.log("Touche pressée :", event.key);
-  if (event.key === "Enter") {
-    console.log("Fermeture de la lightbox...");
-    closeLightbox();
-  }
-});
+    // Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
+    closeButton.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        closeLightbox();
+      }
+    });
 
-
-// Fonction pour fermer la lightbox
-function closeLightbox() {
-  lightbox.remove();
-}
-
-    
+    // Fonction pour fermer la lightbox
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      lightbox.innerHTML = '';
+    }
 
     // Mettre à jour l'index actuel
     currentIndex = index;

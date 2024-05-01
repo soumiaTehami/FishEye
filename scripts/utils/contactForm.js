@@ -4,6 +4,24 @@ const closeButton = document.querySelector('img[src="assets/icons/close.svg"]');
 // Définir l'attribut tabindex sur le bouton
 modal.setAttribute("tabindex", "0");
 
+// Ajouter un écouteur d'événements pour détecter la touche Tab pressée
+modal.addEventListener("keydown", function(event) {
+    if (event.key === "Tab") {
+        // Ajouter une classe pour encadrer le bouton
+        modal.classList.add("focus-outline");
+    }
+});
+
+// Supprimer la classe d'encadrement lorsque le bouton perd le focus
+modal.addEventListener("blur", function() {
+    // Supprimer la classe pour enlever l'encadrement du bouton
+    modal.classList.remove("focus-outline");
+});
+
+
+
+
+
 // Ajouter un écouteur d'événements pour ouvrir le modal lorsque le bouton est cliqué
 document.querySelector('.contact_button').addEventListener('click', function() {
     displayModal();

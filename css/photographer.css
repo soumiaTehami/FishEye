@@ -1,9 +1,14 @@
 main {
   padding: 0 200px;
 }
-#contact_modal:focus-within button {
+/* #contact_modal:focus-outline {
   outline: thick double rosybrown;
+}  */
+.focus-outline {
+  outline: thick solid blue; /* Style de l'encadrement */
 }
+
+
 #contact_modal {
   display: none; /* Assurez-vous que la modal est cachée par défaut */
   position: fixed; /* Position fixe pour qu'elle reste au-dessus de la page */
@@ -204,7 +209,10 @@ form input {
     justify-content: center;
   }
   
- 
+  .contact_button:focus {
+    border: 2px solid  rosybrown; /* Exemple de style de bordure */
+    outline: none; /* Supprimez l'outline par défaut pour éviter la duplication de la bordure */
+  }
   
   .contact_button {
     font-size: 20px;
@@ -428,6 +436,8 @@ button {
   display: flex;
   justify-content:space-between;
   align-items: center;
+  padding-left: 15px;
+  font-size: clamp(1rem, 1vw, 2rem);
   color: #901c1c;
 }
 
@@ -539,8 +549,8 @@ button {
 
 .media-container img,
 .media-container video {
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height:100%;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease-in-out;
