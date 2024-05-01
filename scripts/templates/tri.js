@@ -55,13 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterMenu = document.querySelector(".dropdown_content");
     filterMenu.classList.toggle("show");
     chevron.classList.toggle("rotate-chevron");
-      updateListetributton();
+    updateListetributton();
   });
 
   // Ajout d'un écouteur d'événement pour le clic sur les options de tri
   filterOptions.forEach((button) => {
-   
-    // updateListetributton();
     button.addEventListener("click", () => {
       const sortBy = button.getAttribute("value");
       sortMediaElements(sortBy);
@@ -71,9 +69,15 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("current_filter").textContent = currentFilterText;
 
       const filterMenu = document.querySelector(".dropdown_content");
-    
       filterMenu.classList.remove("show");
       chevron.classList.remove("rotate-chevron");
+    });
+
+    // Ajout d'un écouteur d'événement pour la touche "Enter" lorsqu'un bouton est en focus
+    button.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        button.click(); // Simule un clic lorsque la touche "Enter" est pressée
+      }
     });
   });
 });
