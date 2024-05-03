@@ -1,7 +1,14 @@
+
 export function createLightbox(index, mediaList, photographerName) {
   const lightbox = document.createElement("div");
   lightbox.classList.add("lightbox");
   let currentIndex = index; // Index du média actuellement affiché
+
+  // Fonction pour fermer la lightbox
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    lightbox.innerHTML = '';
+  }
 
   // Fonction pour afficher le média à l'index spécifié
   function displayMedia(index) {
@@ -22,7 +29,7 @@ export function createLightbox(index, mediaList, photographerName) {
       // Ajouter le titre de l'image
       const imageTitle = document.createElement("div");
       imageTitle.textContent = media.title || "";
-      imageTitle.classList.add("media-title");
+      imageTitle.classList.add("title");
       fullscreenImageContainer.appendChild(imageTitle);
 
       lightbox.appendChild(fullscreenImageContainer);
@@ -41,7 +48,7 @@ export function createLightbox(index, mediaList, photographerName) {
       // Ajouter le titre de la vidéo
       const videoTitle = document.createElement("div");
       videoTitle.textContent = media.title || "";
-      videoTitle.classList.add("media-title");
+      videoTitle.classList.add("title");
       fullscreenVideoContainer.appendChild(videoTitle);
 
       lightbox.appendChild(fullscreenVideoContainer);
@@ -54,20 +61,12 @@ export function createLightbox(index, mediaList, photographerName) {
     closeButton.addEventListener("click", () => {
       closeLightbox();
     });
+
+    // Donner le focus au bouton de fermeture
+    closeButton.focus();
+    
+    // Ajouter le bouton de fermeture à la lightbox
     lightbox.appendChild(closeButton);
-
-    // Gestionnaire d'événements pour la touche "Enter" sur le bouton de fermeture
-    closeButton.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        closeLightbox();
-      }
-    });
-
-    // Fonction pour fermer la lightbox
-    function closeLightbox() {
-      lightbox.style.display = "none";
-      lightbox.innerHTML = '';
-    }
 
     // Mettre à jour l'index actuel
     currentIndex = index;
@@ -89,39 +88,46 @@ export function createLightbox(index, mediaList, photographerName) {
 
     const nextButton = createNextButton();
     lightbox.appendChild(nextButton);
+
+    // Fonction pour créer le bouton précédent
+    function createPrevButton() {
+      const prevButton = document.createElement("button");
+      prevButton.innerHTML = "<";
+      prevButton.classList.add("nav-button", "left");
+      prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
+        displayMedia(currentIndex);
+      });
+      return prevButton;
+    }
+
+    // Fonction pour créer le bouton suivant
+    function createNextButton() {
+      const nextButton = document.createElement("button");
+      nextButton.innerHTML = ">";
+      nextButton.classList.add("nav-button", "right");
+      nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
+        displayMedia(currentIndex);
+      });
+      return nextButton;
+    }
   }
 
   // Afficher le premier média lors de l'ouverture de la Lightbox
   displayMedia(currentIndex);
 
-  // Fonction pour créer le bouton précédent
-  function createPrevButton() {
-    const prevButton = document.createElement("button");
-    prevButton.innerHTML = "<";
-    prevButton.classList.add("nav-button", "left");
-    prevButton.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length; // Passage circulaire
-      displayMedia(currentIndex);
-    });
-    return prevButton;
-  }
-
-  // Fonction pour créer le bouton suivant
-  function createNextButton() {
-    const nextButton = document.createElement("button");
-    nextButton.innerHTML = ">";
-    nextButton.classList.add("nav-button", "right");
-    nextButton.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % mediaList.length; // Passage circulaire
-      displayMedia(currentIndex);
-    });
-    return nextButton;
-  }
-
   // Ajouter la Lightbox à la page
   document.body.appendChild(lightbox);
 
-  // Gestion des touches du clavier
+  // Gestion de la pression de la touche "Espace" pour fermer la lightbox
+  window.addEventListener("keydown", (event) => {
+    if (event.key === " " || event.keyCode === 32) {
+      closeLightbox();
+    }
+  });
+
+  // Gestion des touches du clavier pour la navigation entre les médias
   document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
       // Aller au média précédent
@@ -131,6 +137,9 @@ export function createLightbox(index, mediaList, photographerName) {
       // Aller au média suivant
       currentIndex = (currentIndex + 1) % mediaList.length;
       displayMedia(currentIndex);
+    } else if (event.key === "Escape") {
+      // Fermer la lightbox lorsque la touche "Escape" est enfoncée
+      closeLightbox();
     }
   });
 

@@ -33,6 +33,11 @@ modal.addEventListener("keydown", function(event) {
         closeModal(); // Fermer le modal lorsqu'on appuie sur "Entrée"
     }
 });
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Espace") {
+        closeModal(); // Fermer le modal lorsqu'on appuie sur "Entrée"
+    }
+});
 
 // Ajouter un écouteur d'événements pour fermer le modal lorsqu'on clique sur l'icône de fermeture
 closeButton.addEventListener('click', closeModal);
