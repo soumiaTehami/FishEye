@@ -1,5 +1,5 @@
 main {
-  padding: 0 245px;
+  padding: 0 220px;
 }
 /* #contact_modal:focus-outline {
   outline: thick double rosybrown;
@@ -518,7 +518,7 @@ button {
 /* Style pour le conteneur d'image ou de vidéo dans la galerie */
 .media-element img,
 .media-element video {
-  max-width: 100%;
+  max-width: 300px;
   height: auto;
 }
 
