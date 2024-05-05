@@ -126,7 +126,6 @@ export function createLightbox(index, mediaList, photographerName) {
       closeLightbox();
     }
   });
-
   // Gestion des touches du clavier pour la navigation entre les médias
   document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
